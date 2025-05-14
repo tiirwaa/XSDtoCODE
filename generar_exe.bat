@@ -1,1 +1,1 @@
-pyinstaller .\exe.spec 
+pyinstaller .\exe.spec --noconfirm

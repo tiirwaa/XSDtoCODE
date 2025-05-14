@@ -5,6 +5,7 @@ from PIL import Image, ImageTk  # Importa PIL para manejar la imagen
 import webbrowser
 import sys
 from pathlib import Path
+from main import main as run_generator
 
 
 class XSDToolGUI:
@@ -44,20 +45,27 @@ class XSDToolGUI:
         if getattr(sys, 'frozen', False):
             # Si está empaquetado, se accede a los recursos desde _MEIPASS
             base_path = Path(sys._MEIPASS)
+            icon_path = Path(sys._MEIPASS) / "iconogui.ico"
         else:
             # Si está en desarrollo, usa la ruta actual
             base_path = Path(__file__).parent
+            icon_path = "iconogui.ico"
 
+        try:
+            self.root.iconbitmap(default=str(icon_path))
+            
+            logo = Image.open(base_path/"logo.png")  # Abre el archivo de imagen
+            logo = logo.resize((150, 150))  # Redimensiona el logo a 150x150 píxeles (ajusta según sea necesario)
+            logo = ImageTk.PhotoImage(logo)  # Convierte la imagen a un formato compatible con Tkinter
 
-        logo = Image.open(base_path/"logo.png")  # Abre el archivo de imagen
-        logo = logo.resize((150, 150))  # Redimensiona el logo a 150x150 píxeles (ajusta según sea necesario)
-        logo = ImageTk.PhotoImage(logo)  # Convierte la imagen a un formato compatible con Tkinter
+             # Mostrar el logo de la empresa
+            logo_label = tk.Label(self.root, image=logo)
+            logo_label.image = logo  # Guardar una referencia para evitar que la imagen se elimine
+            logo_label.pack(pady=10)
+            logo_label.bind("<Button-1>", self.open_services_page)  # Asocia la función al clic en el logo
+        except Exception as e:
+            print(f"No se pudo cargar el ícono o el logo: {e}")    
 
-        # Mostrar el logo de la empresa
-        logo_label = tk.Label(self.root, image=logo)
-        logo_label.image = logo  # Guardar una referencia para evitar que la imagen se elimine
-        logo_label.pack(pady=10)
-        logo_label.bind("<Button-1>", self.open_services_page)  # Asocia la función al clic en el logo
 
         # Nombre de la empresa debajo del logo
         company_name_label = tk.Label(self.root, text="A&G Programación y Desarrollo de Sistemas Informáticos S.A.",
@@ -116,14 +124,46 @@ class XSDToolGUI:
             messagebox.showerror("Error", "Debes seleccionar una carpeta de salida.")
             return
 
-        try:
-            run_generator(xsd, lang, output_folder)
-            messagebox.showinfo("Éxito", "Código generado correctamente.")
-        except Exception as e:
-            # Obtener el traceback completo para analizar el error en detalle
-            error_message = f"Ocurrió un error: {str(e)}\n\n{traceback.format_exc()}"
-            # Mostrar el error en la interfaz de usuario
-            messagebox.showerror("Error", error_message)
+        # Crear la ventana de carga
+        loading_win = tk.Toplevel(self.root)
+        loading_win.title("Generando...")
+        loading_win.geometry("300x100")
+        loading_win.resizable(False, False)
+
+        # Deshabilitar botón de cerrar
+        loading_win.protocol("WM_DELETE_WINDOW", lambda: None)
+
+        # Eliminar los botones de minimizar/maximizar en Windows
+        loading_win.attributes("-toolwindow", True)
+
+        # Hacerla modal: evitar interacción con la ventana principal
+        loading_win.transient(self.root)
+        loading_win.grab_set()
+
+        # Centrar la ventana de carga
+        loading_win.update_idletasks()
+        x = (loading_win.winfo_screenwidth() - 300) // 2
+        y = (loading_win.winfo_screenheight() - 100) // 2
+        loading_win.geometry(f"+{x}+{y}")
+
+        tk.Label(loading_win, text="Generando, por favor espere...").pack(pady=10)
+        progress_bar = ttk.Progressbar(loading_win, mode='indeterminate')
+        progress_bar.pack(fill='x', padx=20, pady=10)
+        progress_bar.start()
+
+        # Ejecutar en segundo plano
+        def task():
+            try:
+                run_generator(xsd, lang, output_folder)
+                self.root.after(0, lambda: messagebox.showinfo("Éxito", "Código generado correctamente."))
+            except Exception as e:
+                error_message = f"Ocurrió un error: {str(e)}\n\n{traceback.format_exc()}"
+                self.root.after(0, lambda: messagebox.showerror("Error", error_message))
+            finally:
+                self.root.after(0, loading_win.destroy)
+
+        import threading
+        threading.Thread(target=task).start()
 
 
 if __name__ == "__main__":
