@@ -1,0 +1,123 @@
+import tkinter as tk
+from tkinter import filedialog, ttk, messagebox
+from tkinter import PhotoImage
+from PIL import Image, ImageTk  # Importa PIL para manejar la imagen
+import webbrowser
+from main import main as run_generator
+
+
+class XSDToolGUI:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("XSDtoCODE")
+        
+        # Tamaño de la ventana
+        window_width = 400
+        window_height = 520
+        
+        # Obtener dimensiones de la pantalla
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+
+        # Calcular la posición para centrar la ventana
+        position_top = int(screen_height / 2 - window_height / 2)
+        position_left = int(screen_width / 2 - window_width / 2)
+
+        # Establecer la geometría de la ventana
+        self.root.geometry(f'{window_width}x{window_height}+{position_left}+{position_top}')
+        
+        self.root.resizable(False, False)  # Esto hace que la ventana no sea redimensionable
+
+        self.xsd_path = tk.StringVar()
+        self.language = tk.StringVar(value="java")
+        self.output_dir = tk.StringVar()
+
+        self.build_ui()
+
+    def build_ui(self):
+        # Crear un contenedor para centrar los elementos
+        center_frame = tk.Frame(self.root)
+        center_frame.pack(expand=True)
+
+        # Cargar y redimensionar el logo
+        logo = Image.open("logo.png")  # Abre el archivo de imagen
+        logo = logo.resize((150, 150))  # Redimensiona el logo a 150x150 píxeles (ajusta según sea necesario)
+        logo = ImageTk.PhotoImage(logo)  # Convierte la imagen a un formato compatible con Tkinter
+
+        # Mostrar el logo de la empresa
+        logo_label = tk.Label(self.root, image=logo)
+        logo_label.image = logo  # Guardar una referencia para evitar que la imagen se elimine
+        logo_label.pack(pady=10)
+        logo_label.bind("<Button-1>", self.open_services_page)  # Asocia la función al clic en el logo
+
+        # Nombre de la empresa debajo del logo
+        company_name_label = tk.Label(self.root, text="A&G Programación y Desarrollo de Sistemas Informáticos S.A.",
+                                      fg="blue", cursor="hand2")
+        company_name_label.pack(pady=5)
+        company_name_label.bind("<Button-1>", self.open_services_page)  # Asocia la función al clic en el nombre
+
+        # Agregar el enlace a los servicios de la empresa
+        tk.Label(self.root, text="Conozca más de nuestros servicios", fg="blue", cursor="hand2").pack(pady=5)
+        self.build_ui_elements()
+
+    def open_services_page(self, event=None):
+        webbrowser.open("https://agsoft.co.cr/servicios/")
+
+    def build_ui_elements(self):
+        # Entrada para el archivo XSD
+        tk.Label(self.root, text="Archivo XSD:").pack(pady=5)
+        entry = tk.Entry(self.root, textvariable=self.xsd_path, width=40)
+        entry.pack()
+        tk.Button(self.root, text="Buscar...", command=self.browse_file).pack(pady=5)
+
+        # Selector de lenguaje
+        tk.Label(self.root, text="Lenguaje de salida:").pack(pady=5)
+        lang_combo = ttk.Combobox(self.root, textvariable=self.language, values=["java", "python", "csharp"])
+        lang_combo.pack()
+
+        # Selector de carpeta de salida
+        tk.Label(self.root, text="Carpeta de salida:").pack(pady=5)
+        output_entry = tk.Entry(self.root, textvariable=self.output_dir, width=40)
+        output_entry.pack()
+        tk.Button(self.root, text="Seleccionar carpeta...", command=self.browse_output_folder).pack(pady=5)
+
+        # Botón para generar el código
+        tk.Button(self.root, text="Generar Código", command=self.generate_code).pack(pady=15)
+
+    def browse_file(self):
+        file_path = filedialog.askopenfilename(filetypes=[("XSD files", "*.xsd")])
+        if file_path:
+            self.xsd_path.set(file_path)
+
+    def browse_output_folder(self):
+        folder_path = filedialog.askdirectory()
+        if folder_path:
+            self.output_dir.set(folder_path)
+
+    def generate_code(self):
+        xsd = self.xsd_path.get()
+        lang = self.language.get()
+        output_folder = self.output_dir.get()
+
+        if not xsd:
+            messagebox.showerror("Error", "Debes seleccionar un archivo XSD.")
+            return
+
+        if not output_folder:
+            messagebox.showerror("Error", "Debes seleccionar una carpeta de salida.")
+            return
+
+        try:
+            run_generator(xsd, lang, output_folder)
+            messagebox.showinfo("Éxito", "Código generado correctamente.")
+        except Exception as e:
+            # Obtener el traceback completo para analizar el error en detalle
+            error_message = f"Ocurrió un error: {str(e)}\n\n{traceback.format_exc()}"
+            # Mostrar el error en la interfaz de usuario
+            messagebox.showerror("Error", error_message)
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = XSDToolGUI(root)
+    root.mainloop()
