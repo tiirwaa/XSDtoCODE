@@ -20,6 +20,9 @@ pip install xsdata[cli]
 
 ## 🖥️ Uso en Consola
 python main.py <archivo.xsd> <lenguaje> <carpeta_salida>
+
+---
+
 main.exe <archivo.xsd> <lenguaje> <carpeta_salida>
 
 ## ⚙️ Generar EXE
