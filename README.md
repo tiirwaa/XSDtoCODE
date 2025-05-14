@@ -1,6 +1,6 @@
 # XSDtoCODE
 
-![Logo](logogui.ico)
+![Logo](iconogui.ico)
 
 **XSDtoCODE** es una herramienta multiplataforma escrita en Python que genera clases a partir de archivos XSD para múltiples lenguajes de programación (**Java**, **C#**, **Python**, entre otros). Utiliza generadores como `xjc`, `xsd.exe`, `XmlSchemaClassGenerator` y `xsdata`, facilitando la integración de esquemas XML en tus proyectos.
 
@@ -26,4 +26,7 @@ main.exe <archivo.xsd> <lenguaje> <carpeta_salida>
 generar_exe.bat
 
 
+
+##  
+Desarrollado por: [A&G Programación y Desarrollo de Sistemas Informáticos S.A.](https://agsoft.co.cr)  
 ![Logo](https://agsoft.co.cr/wp-content/uploads/2023/08/logo.png)
