@@ -19,6 +19,6 @@ Se concede permiso, de manera gratuita, para usar, copiar y modificar el softwar
 
 7. **Uso de Clases Generadas**: Las clases generadas por este software a partir de archivos XSD pueden ser utilizadas libremente, incluso en aplicaciones comerciales, siempre y cuando se respeten las condiciones anteriores.
 
-La licencia se rige por las leyes del país donde A&G Programación y Desarrollo de Sistemas Informáticos S.A. está registrada.
+La licencia se rige por las leyes de Costa Rica donde A&G Programación y Desarrollo de Sistemas Informáticos S.A. está registrada.
 
 Si tienes dudas o preguntas sobre el uso del software, visita nuestro sitio web en [agsoft.co.cr](http://agsoft.co.cr).

@@ -1,5 +1,6 @@
 import subprocess
-import os
+import sys
+from pathlib import Path
 from generator.base import CodeGeneratorStrategy
 
 class JavaGenerator(CodeGeneratorStrategy):
@@ -11,8 +12,18 @@ class JavaGenerator(CodeGeneratorStrategy):
         Utiliza xjc desde el JDK local para generar clases Java.
         """
         # Ruta al binario de Java en tu JDK dentro de tu carpeta de proyecto
-        jdk_path = os.path.join("jdk1.8.0_202", "bin", "xjc")
+        # Obtener la ruta correcta al binario de xjc
+        if getattr(sys, 'frozen', False):
+            # Si se está ejecutando desde un archivo empaquetado
+            base_path = Path(sys._MEIPASS)
+        else:
+            # Si se está ejecutando desde el código fuente
+            base_path = Path(__file__).parent.parent
 
+        # Ruta al binario xjc dentro de la carpeta jdk del proyecto
+        jdk_path = base_path / "jdk1.8.0_202" / "bin" / "xjc"
+
+        
         # Ejecutar xjc directamente
         result = subprocess.run([
             jdk_path,

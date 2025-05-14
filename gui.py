@@ -1,8 +1,10 @@
 import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
-from tkinter import PhotoImage
+import traceback
 from PIL import Image, ImageTk  # Importa PIL para manejar la imagen
 import webbrowser
+import sys
+from pathlib import Path
 from main import main as run_generator
 
 
@@ -40,7 +42,15 @@ class XSDToolGUI:
         center_frame.pack(expand=True)
 
         # Cargar y redimensionar el logo
-        logo = Image.open("logo.png")  # Abre el archivo de imagen
+        if getattr(sys, 'frozen', False):
+            # Si está empaquetado, se accede a los recursos desde _MEIPASS
+            base_path = Path(sys._MEIPASS)
+        else:
+            # Si está en desarrollo, usa la ruta actual
+            base_path = Path(__file__).parent
+
+
+        logo = Image.open(base_path/"logo.png")  # Abre el archivo de imagen
         logo = logo.resize((150, 150))  # Redimensiona el logo a 150x150 píxeles (ajusta según sea necesario)
         logo = ImageTk.PhotoImage(logo)  # Convierte la imagen a un formato compatible con Tkinter
 

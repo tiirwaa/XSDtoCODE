@@ -1,5 +1,6 @@
 from pathlib import Path
 import subprocess
+import sys
 import os
 from generator.base import CodeGeneratorStrategy
 
@@ -8,7 +9,17 @@ class CSharpGenerator(CodeGeneratorStrategy):
         return self.generate_classes_with_xmlschema_class_generator(xsd_path)
 
     def generate_classes_with_xmlschema_class_generator(self, xsd_file_path):
-        exe_path = os.path.abspath("csharp/XmlSchemaClassGenerator/XmlSchemaClassGenerator.Console.exe")
+        # Obtener la ruta al ejecutable XmlSchemaClassGenerator.Console.exe
+        if getattr(sys, 'frozen', False):
+            # Si se ejecuta desde el archivo empaquetado
+            base_path = Path(sys._MEIPASS)
+        else:
+            # Si se ejecuta desde el código fuente
+            base_path = Path(__file__).parent.parent
+
+        # Obtener la ruta del ejecutable
+        exe_path = base_path / "csharp/XmlSchemaClassGenerator/XmlSchemaClassGenerator.Console.exe"
+
         xsd_abs_path = os.path.abspath(xsd_file_path)
         output_abs_path = os.path.abspath(self.output_folder)
 
@@ -20,7 +31,6 @@ class CSharpGenerator(CodeGeneratorStrategy):
             xsd_abs_path,
         ]
 
-        print(f"Ejecutando comando: {' '.join(command)}")
 
         result = subprocess.run(command, capture_output=True, text=True)
 
