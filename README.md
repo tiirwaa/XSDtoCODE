@@ -15,7 +15,9 @@
 Instala las siguientes dependencias con `pip`:
 
 pip install pillow
+---
 pip install xsdata
+---
 pip install xsdata[cli]
 
 ## 🔣 Lenguajes disponibles actualmente
