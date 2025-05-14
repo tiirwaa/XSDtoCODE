@@ -1,0 +1,24 @@
+Copyright (c) [Año] A&G Programación y Desarrollo de Sistemas Informáticos S.A.
+
+Se concede permiso, de manera gratuita, para usar, copiar y modificar el software exclusivamente para los siguientes fines:
+
+1. **Uso y modificación con fines específicos**: Se permite modificar el software solo para adaptar o mejorar la generación de clases, o para agregar soporte a nuevos lenguajes de programación. Sin embargo, **no se permite la creación de trabajos derivados del software**, ni la distribución de nuevas versiones del software fuera de estos fines específicos.
+
+2. **Reconocimiento**: Las copias del software, ya sea modificadas o no, deben incluir el aviso de copyright anterior y las condiciones de esta licencia.
+
+3. **Uso de Clases Generadas**: Las clases generadas por este software a partir de archivos XSD pueden ser utilizadas libremente para cualquier propósito, siempre que el uso no infrinja otros términos de esta licencia.
+
+4. **Restricciones**:
+   - **No sublicencia ni venta**: El software en su totalidad no puede ser sublicenciado, vendido ni distribuido con fines comerciales. Esto incluye el código fuente original y cualquier versión modificada del mismo.
+   - **Reconocimiento de A&G Programación y Desarrollo de Sistemas Informáticos S.A.**: El logo de la empresa A&G Programación y Desarrollo de Sistemas Informáticos S.A. y las referencias al sitio web de la empresa (agsoft.co.cr) no pueden ser eliminados ni alterados de ninguna parte del software, documentación o cualquier otra distribución del software.
+   - **Propiedad**: El software sigue siendo propiedad exclusiva de A&G Programación y Desarrollo de Sistemas Informáticos S.A. y su distribución está sujeta a la autorización de la empresa.
+
+5. **Garantías**: El software se proporciona "tal cual", sin garantías de ningún tipo, explícitas o implícitas, incluyendo pero no limitándose a las garantías implícitas de comercialización o adecuación para un propósito particular. En ningún caso, los autores o titulares del copyright serán responsables de cualquier reclamo, daño o cualquier otra responsabilidad, ya sea en una acción de contrato, agravio o de otro tipo, derivada de, o en conexión con el software o el uso u otros tratos en el software.
+
+6. **Modificaciones**: Cualquier modificación del software debe mantener las atribuciones correspondientes a A&G Programación y Desarrollo de Sistemas Informáticos S.A. y no debe ser distribuida de manera que indique que A&G Programación y Desarrollo de Sistemas Informáticos S.A. respalda o aprueba la modificación.
+
+7. **Uso de Clases Generadas**: Las clases generadas por este software a partir de archivos XSD pueden ser utilizadas libremente, incluso en aplicaciones comerciales, siempre y cuando se respeten las condiciones anteriores.
+
+La licencia se rige por las leyes del país donde A&G Programación y Desarrollo de Sistemas Informáticos S.A. está registrada.
+
+Si tienes dudas o preguntas sobre el uso del software, visita nuestro sitio web en [agsoft.co.cr](http://agsoft.co.cr).
