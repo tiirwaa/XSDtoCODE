@@ -31,8 +31,16 @@ class CSharpGenerator(CodeGeneratorStrategy):
             xsd_abs_path,
         ]
 
+        # Solo en Windows, evita que se abra ventana de cmd
+        kwargs = {
+            "capture_output": True,
+            "text": True
+        }
+        if sys.platform == "win32":
+            kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
 
-        result = subprocess.run(command, capture_output=True, text=True)
+
+        result = subprocess.run(command, **kwargs)
 
         if result.returncode != 0:
             print("❌ Error al ejecutar XmlSchemaClassGenerator:")

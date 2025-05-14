@@ -5,7 +5,6 @@ from PIL import Image, ImageTk  # Importa PIL para manejar la imagen
 import webbrowser
 import sys
 from pathlib import Path
-from main import main as run_generator
 
 
 class XSDToolGUI:

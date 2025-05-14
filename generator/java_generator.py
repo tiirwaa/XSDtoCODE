@@ -23,6 +23,13 @@ class JavaGenerator(CodeGeneratorStrategy):
         # Ruta al binario xjc dentro de la carpeta jdk del proyecto
         jdk_path = base_path / "jdk1.8.0_202" / "bin" / "xjc"
 
+
+        kwargs = {
+            "capture_output": True,
+            "text": True
+        }
+        if sys.platform == "win32":
+            kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
         
         # Ejecutar xjc directamente
         result = subprocess.run([
@@ -31,7 +38,7 @@ class JavaGenerator(CodeGeneratorStrategy):
             "-p", "com.example.generated",    # Paquete de clases generado
             "-extension",                     # Habilitar las extensiones JAXB
             xsd_file_path
-        ], capture_output=True, text=True)
+        ], **kwargs)
 
         if result.returncode != 0:
             print("❌ Error al ejecutar xjc:")

@@ -35,7 +35,23 @@ class PythonGenerator(CodeGeneratorStrategy):
                 os.environ["PATH"] += os.pathsep + str(ruff_dir)
                 print(f"[DEBUG] PATH: {os.environ['PATH']}")
 
-            xsdata_main()  # Llama a la CLI de xsdata directamente
+            if sys.platform == "win32":
+                import subprocess
+                original_popen = subprocess.Popen
+
+                def patched_popen(*args, **kwargs):
+                    kwargs.setdefault("creationflags", subprocess.CREATE_NO_WINDOW)
+                    return original_popen(*args, **kwargs)
+
+                subprocess.Popen = patched_popen  
+
+            try:
+                xsdata_main()  # Puede llamar a sys.exit()
+            except SystemExit as e:
+                if e.code != 0:
+                    print(f"❌ xsdata terminó con error (código {e.code})")
+                    raise
+
             print("✅ Clases Python generadas con éxito usando xsdata.")
         except Exception as e:
             print("❌ Error al ejecutar xsdata:")

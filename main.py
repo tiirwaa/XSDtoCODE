@@ -33,5 +33,6 @@ def main(xsd_path, language, output_folder):
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("Uso: python main.py <archivo.xsd> <lenguaje> <carpeta_salida>")
+        print("Uso: main.exe <archivo.xsd> <lenguaje> <carpeta_salida>")
     else:
         main(sys.argv[1], sys.argv[2], sys.argv[3])
