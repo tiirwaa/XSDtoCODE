@@ -18,7 +18,7 @@ pip install pillow
 pip install xsdata
 pip install xsdata[cli]
 
-## 🖥️ Lenguajes disponibles actualmente
+## 🔣 Lenguajes disponibles actualmente
 java, csharp, python
 
 ## 🖥️ Uso en Consola
