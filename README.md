@@ -18,12 +18,15 @@ pip install pillow
 pip install xsdata
 pip install xsdata[cli]
 
+## 🖥️ Lenguajes disponibles actualmente
+java, csharp, python
+
 ## 🖥️ Uso en Consola
-python main.py <archivo.xsd> <lenguaje> <carpeta_salida>
+python main.py "archivo.xsd" "lenguaje" "carpeta_salida"
 
 ---
 
-main.exe <archivo.xsd> <lenguaje> <carpeta_salida>
+main.exe "archivo.xsd" "lenguaje" "carpeta_salida"
 
 ## ⚙️ Generar EXE
 generar_exe.bat
