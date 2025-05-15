@@ -2,7 +2,7 @@
 
 ![Logo](iconogui.ico)
 
-**XSDtoCODE** es una herramienta escrita en Python que genera clases a partir de archivos XSD para múltiples lenguajes de programación (**Java**, **C#**, **Python**,**JSONScheme**, entre otros). Utiliza generadores como `xjc`,  `XmlSchemaClassGenerator`, `xsd2jsonschema` y `xsdata`, facilitando la integración de esquemas XML en tus proyectos.
+**XSDtoCODE** es una herramienta escrita en Python que genera clases a partir de archivos XSD para múltiples lenguajes de programación (**Java**, **C#**, **Python**,**JSONSchema**, entre otros). Utiliza generadores como `xjc`,  `XmlSchemaClassGenerator`, `xsd2jsonschema` y `xsdata`, facilitando la integración de esquemas XML en tus proyectos.
 
 ---
 ![Screen](img/XSDtoCODE.png)
@@ -22,7 +22,7 @@ pip install xsdata[cli]
 -
 
 ## 🔣 Lenguajes disponibles actualmente
-java, csharp, python
+java, csharp, python, JSONSchema
 
 ## 🖥️ Uso en Consola
 python main.py "archivo.xsd" "lenguaje" "carpeta_salida"
