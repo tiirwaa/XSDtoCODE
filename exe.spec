@@ -9,6 +9,7 @@ a_gui = Analysis(
         ('iconomain.ico', '.'),
         ('jdk1.8.0_202', 'jdk1.8.0_202'),
         ('csharp', 'csharp'),
+        ('node', 'node'),
         ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
         ('.venv/Scripts/ruff.exe', 'bin')
     ],

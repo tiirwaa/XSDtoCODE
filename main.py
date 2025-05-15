@@ -2,6 +2,7 @@ from generator.base import CodeGeneratorStrategy
 from generator.java_generator import JavaGenerator
 from generator.python_generator import PythonGenerator
 from generator.csharp_generator import CSharpGenerator
+from generator.json_schema_generator import JSONSchemaGenerator
 import sys
 import os
 
@@ -15,15 +16,19 @@ def main(xsd_path, language, output_folder):
     generators = {
         'java': JavaGenerator(output_folder),
         'python': PythonGenerator(output_folder),
-        'csharp': CSharpGenerator(output_folder)
+        'csharp': CSharpGenerator(output_folder),
+        'JSONSchema': JSONSchemaGenerator(output_folder)
     }
 
-    if language not in generators:
+    language_lower = language.lower()
+    generators_lower = {k.lower(): v for k, v in generators.items()}
+
+    if language_lower not in generators_lower:
         print(f"Lenguaje no soportado: {language}")
         print(f"Lenguajes disponibles: {', '.join(generators.keys())}")
         return
 
-    generator: CodeGeneratorStrategy = generators[language]
+    generator: CodeGeneratorStrategy = generators_lower[language_lower]
     
     # Paso 3: Generar código
     generator.generate(xsd_path)

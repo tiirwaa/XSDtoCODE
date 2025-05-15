@@ -89,7 +89,7 @@ class XSDToolGUI:
 
         # Selector de lenguaje
         tk.Label(self.root, text="Lenguaje de salida:").pack(pady=5)
-        lang_combo = ttk.Combobox(self.root, textvariable=self.language, values=["java", "python", "csharp"])
+        lang_combo = ttk.Combobox(self.root, textvariable=self.language, values=["java", "python", "csharp", "JSONSchema"])
         lang_combo.pack()
 
         # Selector de carpeta de salida
