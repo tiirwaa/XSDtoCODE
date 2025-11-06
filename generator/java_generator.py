@@ -69,7 +69,15 @@ class JavaGenerator(CodeGeneratorStrategy):
             env = os.environ.copy()
             env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"
             env["JAVA_HOME"] = str(base_path / "jdk1.8.0_202")
-            env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")    
+            env["JRE_HOME"] = str(base_path / "jdk1.8.0_202" / "jre")
+            env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + str(base_path / "jdk1.8.0_202" / "jre" / "bin") + os.pathsep + env.get("PATH", "")
+            
+            print(f"JAVA_HOME: {env['JAVA_HOME']}")
+            logging.info(f"JAVA_HOME: {env['JAVA_HOME']}")
+            print(f"JRE_HOME: {env['JRE_HOME']}")
+            logging.info(f"JRE_HOME: {env['JRE_HOME']}")
+            print(f"PATH: {env['PATH']}")
+            logging.info(f"PATH: {env['PATH']}")    
             
             java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
             tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
