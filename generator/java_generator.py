@@ -71,7 +71,9 @@ class JavaGenerator(CodeGeneratorStrategy):
             classpath = f"{tools_jar};{classes_zip}"
 
             result = subprocess.run([
-                str(jdk_path),
+                str(java_exe),
+                "-cp", str(classpath),
+                "com.sun.tools.xjc.Driver",
                 "-d", str(output_abs_path),
                 "-p", "com.example.generated",
                 "-extension",
