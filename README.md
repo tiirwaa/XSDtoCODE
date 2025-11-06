@@ -1,4 +1,4 @@
-# XSDtoCODE
+﻿# XSDtoCODE
 
 ![Logo](iconogui.ico)
 
@@ -13,11 +13,11 @@ La herramienta es compatible con múltiples lenguajes de programación, incluyen
 
 Para cada lenguaje, XSDtoCODE utiliza generadores especializados:  
 
-- **Java**: `xjc`, que convierte esquemas XSD en clases Java listas para serializar/deserializar XML.  
-- **C#**: `XmlSchemaClassGenerator`, que crea clases .NET compatibles con el esquema XML.  
-- **Python**: `xsdata`, que genera clases Python modernas con soporte completo para serialización y deserialización automática de XML.  
-- **PHP**: Script personalizado con PHP embebido, que genera clases PHP con propiedades tipadas basadas en el esquema XSD.  
-- **JSONSchema**: `xsd2jsonschema`, que transforma XSD en esquemas JSON, permitiendo interoperabilidad con aplicaciones que usan JSON basado en XML.
+- **Java**: [`xjc`](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/xjc.html), que convierte esquemas XSD en clases Java listas para serializar/deserializar XML.  
+- **C#**: [`XmlSchemaClassGenerator`](https://github.com/mganss/XmlSchemaClassGenerator), que crea clases .NET compatibles con el esquema XML.  
+- **Python**: [`xsdata`](https://github.com/tefra/xsdata), que genera clases Python modernas con soporte completo para serialización y deserialización automática de XML.  
+- **PHP**: `xsd2php.phar` (compilado desde [goetas-webservices/xsd2php](https://github.com/goetas-webservices/xsd2php)) ejecutado con PHP portable para generar clases PHP y metadata compatibles con JMS Serializer.  
+- **JSONSchema**: [`xsd2jsonschema`](https://github.com/tiirwaa/XSDtoCODE/blob/main/node/convert_xsd_to_jsonschema.js), que transforma XSD en esquemas JSON, permitiendo interoperabilidad con aplicaciones que usan JSON basado en XML.
 
 Entre los principales beneficios de usar XSDtoCODE se incluyen:  
 
@@ -86,16 +86,16 @@ main.exe "archivo.xsd" "java|python|csharp|php|JSONSchema" "carpeta_salida"
 generar_exe.bat
 ```
 
-## 🐘 PHP Portable
+## PHP Portable
 
-XSDtoCODE incluye **PHP completamente portable** (versión 8.3.27), lo que significa que **no requiere instalación previa de PHP** en el sistema. El ejecutable incluye:
+XSDtoCODE incluye **PHP completamente portable** (versión 8.3.27), por lo que **no requiere instalación previa de PHP** en el sistema anfitrión. El ejecutable final incorpora:
 
 - PHP 8.3.27 Thread Safe para Windows x64
-- Todas las extensiones estándar de PHP
-- Script personalizado de conversión XSD a PHP
+- Todas las extensiones estándar necesarias
+- El `xsd2php.phar` compilado desde goetas-webservices/xsd2php
 - Configuración mínima de `php.ini`
 
-Esto garantiza que la generación de clases PHP funcione en cualquier sistema Windows sin dependencias externas.
+Durante la build en GitHub Actions se compila automáticamente el `.phar` con Composer y Box, y se empaqueta dentro de `dist/XSDtoCODE/_internal/`. Así evitamos versionar archivos gigantes y siempre se distribuye la versión actualizada del generador PHP. Esto garantiza que la generación de clases PHP funcione en cualquier sistema Windows sin dependencias externas adicionales.
 
 
 ##  
