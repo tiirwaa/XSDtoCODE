@@ -17,6 +17,7 @@ class JavaGenerator(CodeGeneratorStrategy):
         """
         Utiliza xjc desde el JDK local para generar clases Java.
         """
+        print("Iniciando generación de clases Java")
         if getattr(sys, 'frozen', False):
             # Si se ejecuta desde el archivo empaquetado
             base_path = Path(sys._MEIPASS)
@@ -67,9 +68,12 @@ class JavaGenerator(CodeGeneratorStrategy):
             dt_jar = base_path / "jdk1.8.0_202" / "lib" / "dt.jar"
             classpath = f"{tools_jar}{os.pathsep}{dt_jar}"
 
-            print(f"java_exe: {java_exe}")
-            print(f"exists: {java_exe.exists()}")
+            print(f"java_exe: {java_exe}, exists: {java_exe.exists()}")
+            print(f"tools_jar: {tools_jar}, exists: {tools_jar.exists()}")
+            print(f"dt_jar: {dt_jar}, exists: {dt_jar.exists()}")
+            print(f"classpath: {classpath}")
 
+            print("Ejecutando comando xjc...")
             result = subprocess.run([
                 str(java_exe),
                 "-cp", str(classpath),

@@ -156,17 +156,19 @@ class PHPGenerator(CodeGeneratorStrategy):
         """
         Utiliza xsd2php.phar con PHP portable para generar clases PHP.
         """
-        base_path = Path(__file__).parent.parent
-        
+        print("Iniciando generación de clases PHP")
         if getattr(sys, 'frozen', False):
-            # Cuando está empaquetado, buscar archivos en el directorio _internal
-            exe_dir = Path(sys.executable).parent
-            internal_dir = exe_dir / "_internal"
-            php_exe = internal_dir / "php" / "php.exe"
-            xsd2php_phar = internal_dir / "xsd2php.phar"
+            # Si se ejecuta desde el archivo empaquetado
+            base_path = Path(sys._MEIPASS)
         else:
-            php_exe = base_path / "php" / "php.exe"
-            xsd2php_phar = base_path / "xsd2php.phar"
+            # Si se ejecuta desde el código fuente
+            base_path = Path(__file__).parent.parent
+        
+        php_exe = base_path / "php" / "php.exe"
+        xsd2php_phar = base_path / "xsd2php.phar"
+
+        print(f"php_exe: {php_exe}, exists: {php_exe.exists()}")
+        print(f"xsd2php_phar: {xsd2php_phar}, exists: {xsd2php_phar.exists()}")
 
         xsd_abs_path = os.path.abspath(xsd_file_path)
         output_abs_path = os.path.abspath(self.output_folder)
@@ -263,6 +265,7 @@ class PHPGenerator(CodeGeneratorStrategy):
             env = os.environ.copy()
             env["PHP_TOOL_OPTIONS"] = "-d file.encoding=UTF-8"
 
+            print("Ejecutando comando xsd2php...")
             result = subprocess.run([
                 str(php_exe),
                 str(xsd2php_phar),
