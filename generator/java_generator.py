@@ -56,7 +56,9 @@ class JavaGenerator(CodeGeneratorStrategy):
                 kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
 
             env = os.environ.copy()
-            env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"    
+            env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"
+            env["JAVA_HOME"] = str(base_path / "jdk1.8.0_202")
+            env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")    
             
             result = subprocess.run([
                 str(jdk_path),
