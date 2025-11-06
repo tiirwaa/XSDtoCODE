@@ -68,12 +68,15 @@ class JavaGenerator(CodeGeneratorStrategy):
             java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
             tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
             dt_jar = base_path / "jdk1.8.0_202" / "lib" / "dt.jar"
-            classpath = f"{tools_jar};{dt_jar}"
+            classpath = f"{tools_jar}"
+
+            print(f"java_exe: {java_exe}")
+            print(f"exists: {java_exe.exists()}")
 
             result = subprocess.run([
                 str(java_exe),
                 "-cp", str(classpath),
-                "com.sun.tools.xjc.Driver",
+                "com.sun.tools.internal.xjc.Driver",
                 "-d", str(output_abs_path),
                 "-p", "com.example.generated",
                 "-extension",

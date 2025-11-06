@@ -2,18 +2,19 @@
 a_gui = Analysis(
     ['gui.py'],
     pathex=[],
-    binaries=[],
+    binaries=[
+        ('jdk1.8.0_202', 'jdk1.8.0_202'),
+        ('csharp', 'csharp'),
+        ('schemas', 'schemas'),
+        ('node', 'node'),
+        ('php', 'php'),
+        ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
+        ('.venv/Scripts/ruff.exe', 'bin')
+    ],
     datas=[  # Datos específicos para la GUI
         ('logo.png', '.'),
         ('iconogui.ico', '.'),
         ('iconomain.ico', '.'),
-        ('jdk1.8.0_202', '_internal/jdk1.8.0_202'),
-        ('csharp', '_internal/csharp'),
-        ('schemas', '_internal/schemas'),
-        ('node', '_internal/node'),
-        ('php', '_internal/php'),
-        ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', '_internal/xsdata/formats/dataclass/templates'),
-        ('.venv/Scripts/ruff.exe', '_internal/bin')
     ],
     hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],
@@ -49,15 +50,16 @@ exe_gui = EXE(
 a_main = Analysis(
     ['main.py'],
     pathex=[],
-    binaries=[],
+    binaries=[
+        ('jdk1.8.0_202', 'jdk1.8.0_202'),
+        ('csharp', 'csharp'),
+        ('schemas', 'schemas'),
+        ('node', 'node'),
+        ('php', 'php'),
+        ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
+        ('.venv/Scripts/ruff.exe', 'bin')
+    ],
     datas=[  # Datos específicos para la consola
-        ('jdk1.8.0_202', '_internal/jdk1.8.0_202'),
-        ('csharp', '_internal/csharp'),
-        ('schemas', '_internal/schemas'),
-        ('node', '_internal/node'),
-        ('php', '_internal/php'),
-        ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', '_internal/xsdata/formats/dataclass/templates'),
-        ('.venv/Scripts/ruff.exe', '_internal/bin')
     ],
     hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],

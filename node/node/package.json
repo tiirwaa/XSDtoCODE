@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "xsd2jsonschema": "^0.3.7"
+  }
+}

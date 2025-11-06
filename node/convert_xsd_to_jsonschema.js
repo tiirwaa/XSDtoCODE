@@ -3,36 +3,45 @@ const path = require('path');
 const { Xsd2JsonSchema } = require('xsd2jsonschema');
 
 async function convert(xsdFilePath, outputDir) {
-  const xs2js = new Xsd2JsonSchema({
-    jsonSchemaVersion: 'draft-04'
-  });
+  const versions = ['draft-04', 'draft-06', 'draft-07'];
+  let lastError;
 
-  // Leer archivo XSD
-  const xsdContent = fs.readFileSync(xsdFilePath, 'utf-8');
-  const fileName = path.basename(xsdFilePath);
+  for (const version of versions) {
+    try {
+      const xs2js = new Xsd2JsonSchema({
+        jsonSchemaVersion: version
+      });
 
-  // Procesar
-  let convertedSchemas;
-  try {
-    convertedSchemas = xs2js.processAllSchemas({
-      schemas: { [fileName]: xsdContent }
-    });
-  } catch (e) {
-    console.error('Error al procesar el XSD:');
-    console.error(e.stack || e);
-    throw e; // re-lanzar para que llegue al catch final
+      // Leer archivo XSD
+      const xsdContent = fs.readFileSync(xsdFilePath, 'utf-8');
+      const fileName = path.basename(xsdFilePath);
+
+      // Procesar
+      const convertedSchemas = xs2js.processAllSchemas({
+        schemas: { [fileName]: xsdContent }
+      });
+
+      const jsonSchema = convertedSchemas[fileName].getJsonSchema();
+
+      // Guardar JSON Schema
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+      const outputPath = path.join(outputDir, fileName.replace(/\.xsd$/, '.json'));
+      fs.writeFileSync(outputPath, JSON.stringify(jsonSchema, null, 2), 'utf-8');
+
+      console.log(`JSON Schema generado con versión ${version}: ${outputPath}`);
+      return; // Éxito, salir
+    } catch (e) {
+      lastError = e;
+      console.log(`Versión ${version} falló, intentando siguiente...`);
+    }
   }
 
-  const jsonSchema = convertedSchemas[fileName].getJsonSchema();
-
-  // Guardar JSON Schema
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
-  }
-  const outputPath = path.join(outputDir, fileName.replace(/\.xsd$/, '.json'));
-  fs.writeFileSync(outputPath, JSON.stringify(jsonSchema, null, 2), 'utf-8');
-
-  console.log(`JSON Schema generado: ${outputPath}`);
+  // Si ninguna versión funcionó
+  console.error('Error al procesar el XSD con todas las versiones probadas:');
+  console.error(lastError.stack || lastError);
+  throw lastError;
 }
 
 const [,, xsdFilePath, outputDir] = process.argv;
