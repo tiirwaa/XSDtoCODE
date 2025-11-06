@@ -31,7 +31,7 @@ jobs:
     - name: Build xsd2php.phar
       run: |
         cd xsd2php-build
-        box compile
+        box compile --no-parallel
 
     - name: Set up Python
       uses: actions/setup-python@v4
