@@ -19,7 +19,8 @@ class JavaGenerator(CodeGeneratorStrategy):
         """
         if getattr(sys, 'frozen', False):
             exe_dir = Path(sys.executable).parent
-            base_path = exe_dir
+            internal_dir = exe_dir / "_internal"
+            base_path = internal_dir
         else:
             base_path = Path(__file__).parent.parent
 
