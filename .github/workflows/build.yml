@@ -26,16 +26,11 @@ jobs:
         tools: composer, box
         ini-values: phar.readonly=0
 
-    - name: Install xsd2php dependencies
-      run: composer install --working-dir=xsd2php-build --no-progress --prefer-dist --no-interaction
-
-    - name: Build xsd2php.phar
-      shell: bash
+    - name: Download xsd2php.phar
       run: |
-        export TMP=$RUNNER_TEMP
-        cd xsd2php-build
-        box compile --no-parallel || true
-        if [ -f ../xsd2php.phar ]; then echo "PHAR created successfully"; else echo "PHAR not found, using existing"; fi
+        choco install 7zip -y
+        Invoke-WebRequest -Uri "https://agsoft.co.cr/res/XSDtoCODE/PHAR/xsd2php.phar.7z" -OutFile "xsd2php.phar.7z"
+        7z x xsd2php.phar.7z
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -77,9 +72,9 @@ jobs:
         name: XSDtoCODE-EXE
         path: XSDtoCODE-EXE/
 
-    - name: Create ZIP
+    - name: Create 7z
       run: |
-        zip -r XSDtoCODE-${{ github.ref_name }}.zip XSDtoCODE-EXE/
+        7z a XSDtoCODE-${{ github.ref_name }}.7z XSDtoCODE-EXE/
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -92,4 +87,4 @@ jobs:
           Descarga el EXE empaquetado desde los assets.
         draft: false
         prerelease: false
-        files: ./XSDtoCODE-${{ github.ref_name }}.zip
+        files: ./XSDtoCODE-${{ github.ref_name }}.7z
