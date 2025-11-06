@@ -3,6 +3,7 @@ from generator.java_generator import JavaGenerator
 from generator.python_generator import PythonGenerator
 from generator.csharp_generator import CSharpGenerator
 from generator.json_schema_generator import JSONSchemaGenerator
+from generator.php_generator import PHPGenerator
 import sys
 import os
 
@@ -17,7 +18,8 @@ def main(xsd_path, language, output_folder):
         'java': JavaGenerator(output_folder),
         'python': PythonGenerator(output_folder),
         'csharp': CSharpGenerator(output_folder),
-        'JSONSchema': JSONSchemaGenerator(output_folder)
+        'JSONSchema': JSONSchemaGenerator(output_folder),
+        'php': PHPGenerator(output_folder)
     }
 
     language_lower = language.lower()

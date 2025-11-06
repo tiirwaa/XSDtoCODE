@@ -1,0 +1,1387 @@
+{
+  "id": "FacturaElectronica_V4.4.json",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "This JSON Schema file was generated from FacturaElectronica_V4.4.xsd on Thu Nov 06 2025 09:31:08 GMT-0600 (hora estándar central).  For more information please see http://www.xsd2jsonschema.org",
+  "description": "Schema tag attributes: xmlns='https://cdn.comprobanteselectronicos.go.cr/xml-schemas/v4.4/facturaElectronica' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:vc='http://www.w3.org/2007/XMLSchema-versioning' xmlns:ds='http://www.w3.org/2000/09/xmldsig#' targetNamespace='https://cdn.comprobanteselectronicos.go.cr/xml-schemas/v4.4/facturaElectronica' elementFormDefault='qualified' attributeFormDefault='unqualified' version='4.4' vc:minVersion='1.1'",
+  "properties": {
+    "FacturaElectronica": {
+      "$ref": "#/definitions/FacturaElectronica"
+    },
+    "EmisorType": {
+      "$ref": "#/definitions/EmisorType"
+    },
+    "ReceptorType": {
+      "$ref": "#/definitions/ReceptorType"
+    },
+    "IdentificacionType": {
+      "$ref": "#/definitions/IdentificacionType"
+    },
+    "UbicacionType": {
+      "$ref": "#/definitions/UbicacionType"
+    },
+    "TelefonoType": {
+      "$ref": "#/definitions/TelefonoType"
+    },
+    "ExoneracionType": {
+      "$ref": "#/definitions/ExoneracionType"
+    },
+    "ImpuestoType": {
+      "$ref": "#/definitions/ImpuestoType"
+    },
+    "CodigoType": {
+      "$ref": "#/definitions/CodigoType"
+    },
+    "DescuentoType": {
+      "$ref": "#/definitions/DescuentoType"
+    },
+    "OtrosCargosType": {
+      "$ref": "#/definitions/OtrosCargosType"
+    },
+    "CodigoMonedaType": {
+      "$ref": "#/definitions/CodigoMonedaType"
+    },
+    "DecimalDineroType": {
+      "$ref": "#/definitions/DecimalDineroType"
+    },
+    "ClaveType": {
+      "$ref": "#/definitions/ClaveType"
+    },
+    "NumeroConsecutivoType": {
+      "$ref": "#/definitions/NumeroConsecutivoType"
+    },
+    "UnidadMedidaType": {
+      "$ref": "#/definitions/UnidadMedidaType"
+    },
+    "TipoTransaccionType": {
+      "$ref": "#/definitions/TipoTransaccionType"
+    },
+    "CodigoDescuentoType": {
+      "$ref": "#/definitions/CodigoDescuentoType"
+    },
+    "CodigoImpuestoType": {
+      "$ref": "#/definitions/CodigoImpuestoType"
+    },
+    "CodigoTarifaIVAType": {
+      "$ref": "#/definitions/CodigoTarifaIVAType"
+    },
+    "TipoExoneracionType": {
+      "$ref": "#/definitions/TipoExoneracionType"
+    },
+    "TipoDocOtrosCargosType": {
+      "$ref": "#/definitions/TipoDocOtrosCargosType"
+    },
+    "TipoDocReferenciaType": {
+      "$ref": "#/definitions/TipoDocReferenciaType"
+    },
+    "CodigoReferenciaType": {
+      "$ref": "#/definitions/CodigoReferenciaType"
+    },
+    "restrictedString": {
+      "$ref": "#/definitions/restrictedString"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "required": [
+        "FacturaElectronica"
+      ]
+    },
+    {
+      "required": [
+        "EmisorType"
+      ]
+    },
+    {
+      "required": [
+        "ReceptorType"
+      ]
+    },
+    {
+      "required": [
+        "IdentificacionType"
+      ]
+    },
+    {
+      "required": [
+        "UbicacionType"
+      ]
+    },
+    {
+      "required": [
+        "TelefonoType"
+      ]
+    },
+    {
+      "required": [
+        "ExoneracionType"
+      ]
+    },
+    {
+      "required": [
+        "ImpuestoType"
+      ]
+    },
+    {
+      "required": [
+        "CodigoType"
+      ]
+    },
+    {
+      "required": [
+        "DescuentoType"
+      ]
+    },
+    {
+      "required": [
+        "OtrosCargosType"
+      ]
+    },
+    {
+      "required": [
+        "CodigoMonedaType"
+      ]
+    },
+    {
+      "required": [
+        "DecimalDineroType"
+      ]
+    },
+    {
+      "required": [
+        "ClaveType"
+      ]
+    },
+    {
+      "required": [
+        "NumeroConsecutivoType"
+      ]
+    },
+    {
+      "required": [
+        "UnidadMedidaType"
+      ]
+    },
+    {
+      "required": [
+        "TipoTransaccionType"
+      ]
+    },
+    {
+      "required": [
+        "CodigoDescuentoType"
+      ]
+    },
+    {
+      "required": [
+        "CodigoImpuestoType"
+      ]
+    },
+    {
+      "required": [
+        "CodigoTarifaIVAType"
+      ]
+    },
+    {
+      "required": [
+        "TipoExoneracionType"
+      ]
+    },
+    {
+      "required": [
+        "TipoDocOtrosCargosType"
+      ]
+    },
+    {
+      "required": [
+        "TipoDocReferenciaType"
+      ]
+    },
+    {
+      "required": [
+        "CodigoReferenciaType"
+      ]
+    },
+    {
+      "required": [
+        "restrictedString"
+      ]
+    }
+  ],
+  "definitions": {
+    "FacturaElectronica": {
+      "description": "Elemento Raiz de la Facturacion Electrónica",
+      "required": [
+        "Clave",
+        "ProveedorSistemas",
+        "CodigoActividadEmisor",
+        "NumeroConsecutivo",
+        "FechaEmision",
+        "Emisor",
+        "Receptor",
+        "CondicionVenta",
+        "ResumenFactura",
+        "ds:Signature"
+      ],
+      "properties": {
+        "Clave": {
+          "$ref": "#/definitions/ClaveType",
+          "description": "Corresponde a la clave del comprobante. Es un campo fijo de cincuenta posiciones y se tiene que utilizar para la consulta del código QR"
+        },
+        "ProveedorSistemas": {
+          "description": "Se debe indicar el número de cedula de identificación del proveedor de sistemas que esté utilizando para la emisión de comprobantes electrónicos",
+          "maxLength": 20,
+          "type": "string"
+        },
+        "CodigoActividadEmisor": {
+          "description": "Se debe de indicar el código de la actividad económica inscrita a la cual corresponde el comprobante que se está generando",
+          "maxLength": 6,
+          "minLength": 6,
+          "type": "string"
+        },
+        "CodigoActividadReceptor": {
+          "description": "Se debe de indicar el código de la actividad económica inscrita del receptor a la cual corresponden los bienes o servicios que se le están facturando al receptor en caso de ser requerido para un crédito o un gasto deducible.",
+          "maxLength": 6,
+          "minLength": 6,
+          "type": "string"
+        },
+        "NumeroConsecutivo": {
+          "$ref": "#/definitions/NumeroConsecutivoType",
+          "description": "Numeración consecutiva del comprobante"
+        },
+        "FechaEmision": {
+          "pattern": "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?",
+          "type": "string"
+        },
+        "Emisor": {
+          "$ref": "#/definitions/EmisorType",
+          "description": "Emisor del documento"
+        },
+        "Receptor": {
+          "$ref": "#/definitions/ReceptorType",
+          "description": "Receptor del documento"
+        },
+        "CondicionVenta": {
+          "description": "Otros",
+          "enum": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "10",
+            "12",
+            "13",
+            "14",
+            "15",
+            "99"
+          ],
+          "type": "string"
+        },
+        "CondicionVentaOtros": {
+          "description": "Será obligatorio en caso de utilizar el código 99 de \"Otros\" de la nota 5. Se debe describir puntualmente la condición de la venta utilizada.",
+          "maxLength": 100,
+          "minLength": 5,
+          "type": "string"
+        },
+        "PlazoCredito": {
+          "description": "Plazo del crédito, es obligatorio cuando la venta del producto o prestación del servicio sea a crédito",
+          "type": "integer"
+        },
+        "DetalleServicio": {
+          "description": "Detalle del Servicio, Mercancía u otro",
+          "required": [
+            "LineaDetalle"
+          ],
+          "properties": {
+            "LineaDetalle": {
+              "oneOf": [
+                {},
+                {
+                  "items": {},
+                  "maxItems": 1000,
+                  "type": "array"
+                }
+              ]
+            }
+          }
+        },
+        "OtrosCargos": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/OtrosCargosType"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/OtrosCargosType"
+              },
+              "maxItems": 15,
+              "type": "array"
+            }
+          ]
+        },
+        "ResumenFactura": {
+          "required": [
+            "CodigoTipoMoneda",
+            "TotalVenta",
+            "TotalVentaNeta",
+            "TotalComprobante"
+          ],
+          "properties": {
+            "CodigoTipoMoneda": {
+              "$ref": "#/definitions/CodigoMonedaType"
+            },
+            "TotalServGravados": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total de los servicios gravados con IVA"
+            },
+            "TotalServExentos": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total de los servicios exentos de IVA"
+            },
+            "TotalServExonerado": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total servicios exonerados del IVA"
+            },
+            "TotalServNoSujeto": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Este campo será de condición obligatoria, cuando se seleccionen códigos CAByS que correspondan a un servicio y el servicio sea No Sujeto de IVA"
+            },
+            "TotalMercanciasGravadas": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total mercancias gravadas con IVA"
+            },
+            "TotalMercanciasExentas": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total mercancias exentas de IVA"
+            },
+            "TotalMercExonerada": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total mercancías exoneradas del IVA"
+            },
+            "TotalMercNoSujeta": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Este campo será de condición obligatoria, cuando se seleccionen códigos CAByS que correspondan a una mercancía y la mercancía sea No Sujeta de IVA"
+            },
+            "TotalGravado": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total gravado. se obtiene de la suma del total servicios gravados con IV + total mercancias gravadas con IV"
+            },
+            "TotalExento": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total Exento, se obtiene de la suma de los campos total servicios exentos IV mas total mercancias exentas IV"
+            },
+            "TotalExonerado": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Se obtiene de la suma de los campos \"total servicios exonerados de IVA\" mas \"total de mercancías exoneradas del IVA\"."
+            },
+            "TotalNoSujeto": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Se obtiene de la suma de los campos \"Total servicios No Sujetos de IVA\" mas \"Total mercancías No Sujetas de IVA\"."
+            },
+            "TotalVenta": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Se obtiene de la sumatoria de los campos “total gravado”, “total exento”, “Total Exonerado” y “Total No Sujeto"
+            },
+            "TotalDescuentos": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Se obtiene de la suma de todos los campo de monto de descuento concedido"
+            },
+            "TotalVentaNeta": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Se obtiene de la resta de los campos total venta menos total descuento"
+            },
+            "TotalDesgloseImpuesto": {
+              "oneOf": [
+                {},
+                {
+                  "items": {},
+                  "maxItems": 1000,
+                  "type": "array"
+                }
+              ]
+            },
+            "TotalImpuesto": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Se obtiene de la suma de todos campos monto del impuesto"
+            },
+            "TotalImpAsumEmisorFabrica": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Este campo es de condición obligatoria, cuando existen producto/servicio gravados con algún impuesto en las líneas de detalle que sean asumidos por el emisor"
+            },
+            "TotalIVADevuelto": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "IVA Devuelto"
+            },
+            "TotalOtrosCargos": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Total Otros Cargos"
+            },
+            "MedioPago": {
+              "oneOf": [
+                {},
+                {
+                  "items": {},
+                  "maxItems": 4,
+                  "type": "array"
+                }
+              ]
+            },
+            "TotalComprobante": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Se obtiene de la suma de los campos \"total venta neta\", \"monto total del impuesto\" y \"total otros cargos\" menos \"total IVA devuelto\", en caso de contar con dichos campos."
+            }
+          }
+        },
+        "InformacionReferencia": {
+          "oneOf": [
+            {},
+            {
+              "items": {},
+              "maxItems": 10,
+              "type": "array"
+            }
+          ]
+        },
+        "Otros": {
+          "properties": {
+            "OtroTexto": {
+              "oneOf": [
+                {},
+                {
+                  "items": {},
+                  "type": "array"
+                }
+              ]
+            },
+            "OtroContenido": {
+              "oneOf": [
+                {},
+                {
+                  "items": {},
+                  "type": "array"
+                }
+              ]
+            }
+          }
+        },
+        "ds:Signature": {
+          "oneOf": [
+            {
+              "$ref": "FORWARD_REFERENCE#/to/http://www.w3.org/2000/09/xmldsig#/ds:Signature"
+            },
+            {
+              "items": {
+                "$ref": "FORWARD_REFERENCE#/to/http://www.w3.org/2000/09/xmldsig#/ds:Signature"
+              },
+              "maxItems": 5,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "EmisorType": {
+      "required": [
+        "Nombre",
+        "Identificacion",
+        "Ubicacion",
+        "CorreoElectronico"
+      ],
+      "properties": {
+        "Nombre": {
+          "description": "Nombre o razon social",
+          "maxLength": 100,
+          "minLength": 5,
+          "type": "string"
+        },
+        "Identificacion": {
+          "$ref": "#/definitions/IdentificacionType"
+        },
+        "Registrofiscal8707": {
+          "description": "Campo condicional. Se convierte en carácter obligatorio cuando se estén facturando códigosCAByS de bebidas alcohólicas según la Ley 8707. Contiene los datos del número de registro de bebidas alcohólicas, suministrado por la Dirección General de Aduanas",
+          "maxLength": 12,
+          "type": "string"
+        },
+        "NombreComercial": {
+          "description": "En caso de que se cuente con nombre comercial debe indicarse",
+          "maxLength": 80,
+          "minLength": 3,
+          "type": "string"
+        },
+        "Ubicacion": {
+          "$ref": "#/definitions/UbicacionType"
+        },
+        "Telefono": {
+          "$ref": "#/definitions/TelefonoType"
+        },
+        "CorreoElectronico": {
+          "oneOf": [
+            {},
+            {
+              "items": {},
+              "maxItems": 4,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "ReceptorType": {
+      "required": [
+        "Nombre",
+        "Identificacion"
+      ],
+      "properties": {
+        "Nombre": {
+          "description": "Nombre o razon social",
+          "maxLength": 100,
+          "minLength": 3,
+          "type": "string"
+        },
+        "Identificacion": {
+          "$ref": "#/definitions/IdentificacionType"
+        },
+        "NombreComercial": {
+          "description": "En caso de que se cuente con nombre comercial debe indicarse",
+          "maxLength": 80,
+          "minLength": 3,
+          "type": "string"
+        },
+        "Ubicacion": {
+          "$ref": "#/definitions/UbicacionType"
+        },
+        "OtrasSenasExtranjero": {
+          "description": "Campo para incluir la direccion del extranjero, en caso de requerirse.",
+          "maxLength": 300,
+          "minLength": 5,
+          "type": "string"
+        },
+        "Telefono": {
+          "$ref": "#/definitions/TelefonoType"
+        },
+        "CorreoElectronico": {
+          "description": "Este campo será de condición obligatoria, cuando el cliente lo requiera. Debe cumplir con la siguiente estructura: \\s*\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*\\s*",
+          "maxLength": 160,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IdentificacionType": {
+      "required": [
+        "Tipo",
+        "Numero"
+      ],
+      "properties": {
+        "Tipo": {
+          "description": "No Contribuyente",
+          "enum": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06"
+          ],
+          "type": "string"
+        },
+        "Numero": {
+          "description": "Número de identificación, el contribuyente debe estar inscrito ante la Administración Tributaria",
+          "maxLength": 20,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UbicacionType": {
+      "required": [
+        "Provincia",
+        "Canton",
+        "Distrito",
+        "OtrasSenas"
+      ],
+      "properties": {
+        "Provincia": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "exclusiveMinimum": true,
+          "pattern": "\\d",
+          "type": "integer"
+        },
+        "Canton": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "exclusiveMinimum": true,
+          "pattern": "\\d\\d",
+          "type": "integer"
+        },
+        "Distrito": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "exclusiveMinimum": true,
+          "pattern": "\\d\\d",
+          "type": "integer"
+        },
+        "Barrio": {
+          "maxLength": 50,
+          "minLength": 5,
+          "type": "string"
+        },
+        "OtrasSenas": {
+          "maxLength": 250,
+          "minLength": 5,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TelefonoType": {
+      "required": [
+        "CodigoPais",
+        "NumTelefono"
+      ],
+      "properties": {
+        "CodigoPais": {
+          "description": "Código del país",
+          "type": "integer"
+        },
+        "NumTelefono": {
+          "description": "Número de teléfono",
+          "maximum": 100000000000000000000,
+          "minimum": 100,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ExoneracionType": {
+      "required": [
+        "TipoDocumentoEX1",
+        "NumeroDocumento",
+        "NombreInstitucion",
+        "FechaEmisionEX",
+        "TarifaExonerada",
+        "MontoExoneracion"
+      ],
+      "properties": {
+        "TipoDocumentoEX1": {
+          "$ref": "#/definitions/TipoExoneracionType",
+          "description": "Tipo de documento de exoneración o autorización."
+        },
+        "TipoDocumentoOTRO": {
+          "description": "Será obligatorio en caso de utilizar el código 99 de “Otros” de la nota 10.1. Se debe describir puntualmente el tipo de documento o autorización utilizado",
+          "maxLength": 100,
+          "minLength": 5,
+          "type": "string"
+        },
+        "NumeroDocumento": {
+          "description": "Número de documento de exoneración o autorización",
+          "maxLength": 40,
+          "minLength": 3,
+          "type": "string"
+        },
+        "Articulo": {
+          "description": "Número de artículo que establece la exoneración o autorización",
+          "type": "integer"
+        },
+        "Inciso": {
+          "description": "Número de inciso que establece la exoneración o autorización",
+          "type": "integer"
+        },
+        "NombreInstitucion": {
+          "description": "Otros",
+          "maxLength": 2,
+          "enum": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12",
+            "99"
+          ],
+          "type": "string"
+        },
+        "NombreInstitucionOtros": {
+          "description": "Detalle Nombre de institución o dependencia que emitió la exoneración OTRO",
+          "maxLength": 160,
+          "minLength": 5,
+          "type": "string"
+        },
+        "FechaEmisionEX": {
+          "description": "Fecha y hora de la emisión del documento de exoneración o autorización.",
+          "pattern": "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?",
+          "type": "string"
+        },
+        "TarifaExonerada": {
+          "description": "Tarifa exonerada",
+          "type": "number"
+        },
+        "MontoExoneracion": {
+          "$ref": "#/definitions/DecimalDineroType",
+          "description": "Monto del impuesto exonerado"
+        }
+      },
+      "type": "object"
+    },
+    "ImpuestoType": {
+      "required": [
+        "Codigo",
+        "Monto"
+      ],
+      "properties": {
+        "Codigo": {
+          "$ref": "#/definitions/CodigoImpuestoType",
+          "description": "Código del impuesto: 01 Impuesto al valor agregado, 02 Impuesto Selectivo de Consumo, 03 Impuesto único a los combustivos, 04 Impuesto específico de bebidas alcohólicas, 05 Impuesto específico sobre las bebidas envasadas sin contenido alcohólico y jabones de tocador, 06 Impuesto a los productos de tabaco, 07 IVA (cálculo especial), 08 IVA Regimen de Bienes Usados (Factor), 12 Impuesto Especifico al cemento, 99 Otros"
+        },
+        "CodigoImpuestoOTRO": {
+          "description": "Será obligatorio en caso de utilizar el código 99 de “Otros” de la nota 8. Se debe describir puntualmente el impuesto utilizado",
+          "maxLength": 100,
+          "minLength": 5,
+          "type": "string"
+        },
+        "CodigoTarifaIVA": {
+          "$ref": "#/definitions/CodigoTarifaIVAType",
+          "description": "En el caso que se utilice el nodo “Detalle de productos del surtido, paquetes o combos”, no se deberá utilizar este campo, ya que el impuesto se calcula como la suma de los montos de impuestos individuales de las líneas de detalle de los componentes del surtido que se deben incluir en estos casos. La eventual validación de la consistencia de los impuestos calculados y aplicación de tarifas se hará sobre las líneas individuales de detalle."
+        },
+        "Tarifa": {
+          "description": "En el caso que se utilice el nodo “Detalle de productos del surtido, paquetes o combos”, no se deberá utilizar este campo, ya que el impuesto se calcula como la suma de los montos de impuestos individuales de las líneas de detalle de componentes del surtido que se deben incluir en estos casos. La eventual validación de la consistencia de los impuestos calculados y aplicación de tarifas se hará sobre las líneas individuales de detalle.",
+          "type": "number"
+        },
+        "FactorCalculoIVA": {
+          "description": "Este campo es de condición obligatoria, cuando el producto/servicio posea un factor para su cálculo. Cuando en el código de impuesto se defina IVA Bienes Usados se deberá utilizar este campo con el factor establecido por el Ministerio de Hacienda",
+          "type": "number"
+        },
+        "DatosImpuestoEspecifico": {
+          "description": "Tipo complejo con el detalle para calcular impuestos específicos no tarifarios. Este campo es de condición obligatoria, cuando se utilicen los códigos de impuesto 03, 04, 05, 06 de la nota 8 y agrupará los campos requeridos para el cálculo de estos impuestos",
+          "required": [
+            "CantidadUnidadMedida",
+            "ImpuestoUnidad"
+          ],
+          "properties": {
+            "CantidadUnidadMedida": {
+              "description": "En el caso que se utilice el nodo “Detalle de productos del surtido, paquetes o combos”, no se deberá utilizar este campo, para los códigos de impuesto 04, 05, 06 de la nota 8, ya que el impuesto se calcula como la suma de los montos de impuestos individuales de las líneas de detalle de componentes del surtido que se deben incluir en estos casos",
+              "type": "number"
+            },
+            "Porcentaje": {
+              "description": "Este campo es de condición obligatoria, cuando se utilice el código de impuesto 04 de la nota 8",
+              "type": "number"
+            },
+            "Proporcion": {
+              "description": "Este campo es de condición obligatoria, cuando se utilice el código de impuesto 04 de la nota 8 Este campo se obtiene de multiplicar la “Cantidad de la unidad de medida a utilizar” por el “Porcentaje”",
+              "type": "number"
+            },
+            "VolumenUnidadConsumo": {
+              "description": "Este campo es de condición obligatoria, cuando se utilice el código de impuesto 05 de la nota 8",
+              "type": "number"
+            },
+            "ImpuestoUnidad": {
+              "$ref": "#/definitions/DecimalDineroType",
+              "description": "Este campo es de condición obligatoria, cuando se utilicen los códigos de impuesto 03, 04, 05 y 06 de la nota 8"
+            }
+          }
+        },
+        "Monto": {
+          "$ref": "#/definitions/DecimalDineroType",
+          "description": "Monto del impuesto"
+        },
+        "Exoneracion": {
+          "$ref": "#/definitions/ExoneracionType"
+        }
+      },
+      "type": "object"
+    },
+    "CodigoType": {
+      "required": [
+        "Tipo",
+        "Codigo"
+      ],
+      "properties": {
+        "Tipo": {
+          "description": "Otros",
+          "maxLength": 2,
+          "minLength": 2,
+          "enum": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "99"
+          ],
+          "type": "string"
+        },
+        "Codigo": {
+          "description": "Será obligatorio para las líneas de detalle que utilicen uno de los códigos de producto/servicio de \"surtidos\" que estén habilitados en el CAByS.",
+          "maxLength": 20,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DescuentoType": {
+      "required": [
+        "MontoDescuento",
+        "CodigoDescuento"
+      ],
+      "properties": {
+        "MontoDescuento": {
+          "$ref": "#/definitions/DecimalDineroType",
+          "description": "Monto de descuento concedido. Este campo será de condición obligatoria, cuando se indique un descuento, en el campo \"Código del descuento\""
+        },
+        "CodigoDescuento": {
+          "$ref": "#/definitions/CodigoDescuentoType",
+          "description": "Este campo será de condición obligatoria, cuando se incluya información en el campo \"monto de descuentos concedidos\""
+        },
+        "CodigoDescuentoOTRO": {
+          "description": "Será obligatorio en caso de utilizar el código 99 de \"Otros\" de la nota 20. Se debe describir puntualmente el descuento utilizado",
+          "maxLength": 100,
+          "minLength": 5,
+          "type": "string"
+        },
+        "NaturalezaDescuento": {
+          "description": "Naturaleza del descuento, que es obligatorio si existe descuento",
+          "maxLength": 80,
+          "minLength": 3,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OtrosCargosType": {
+      "required": [
+        "TipoDocumentoOC",
+        "Detalle",
+        "MontoCargo"
+      ],
+      "properties": {
+        "TipoDocumentoOC": {
+          "description": "Se verificará el cumplimiento de la nota 16. Además, cuando se seleccione el código 04, 08, 09 y 10 de la nota 16 en “Tipo de documento otros cargos” y no se cuente con una línea de servicio o producto, no es obligatorio usar el nodo “Detalle de la mercancía o servicio prestado”.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TipoDocOtrosCargosType"
+            },
+            {
+              "maxLength": 2,
+              "minLength": 2
+            }
+          ]
+        },
+        "TipoDocumentoOTROS": {
+          "description": "Será obligatorio en caso de utilizar el código 99 de “Otros” de la nota 16. Se debe describir puntualmente el tipo de documento utilizado",
+          "maxLength": 100,
+          "minLength": 5,
+          "type": "string"
+        },
+        "IdentificacionTercero": {
+          "$ref": "#/definitions/IdentificacionType"
+        },
+        "NombreTercero": {
+          "description": "Nombre o razón social del receptor",
+          "maxLength": 100,
+          "minLength": 5,
+          "type": "string"
+        },
+        "Detalle": {
+          "description": "Detalle de otros cargos",
+          "maxLength": 160,
+          "type": "string"
+        },
+        "PorcentajeOC": {
+          "description": "En el caso que el cargo posea un porcentaje o monto para su cálculo se debe de indicar el mismo",
+          "minimum": 0,
+          "type": "number"
+        },
+        "MontoCargo": {
+          "$ref": "#/definitions/DecimalDineroType",
+          "description": "Monto del cargo"
+        }
+      },
+      "type": "object"
+    },
+    "CodigoMonedaType": {
+      "required": [
+        "CodigoMoneda",
+        "TipoCambio"
+      ],
+      "properties": {
+        "CodigoMoneda": {
+          "description": "Código de la moneda",
+          "enum": [
+            "AED",
+            "AFN",
+            "ALL",
+            "AMD",
+            "ANG",
+            "AOA",
+            "ARS",
+            "AUD",
+            "AWG",
+            "AZN",
+            "BAM",
+            "BBD",
+            "BDT",
+            "BGN",
+            "BHD",
+            "BIF",
+            "BMD",
+            "BND",
+            "BOB",
+            "BOV",
+            "BRL",
+            "BSD",
+            "BTN",
+            "BWP",
+            "BYR",
+            "BZD",
+            "CAD",
+            "CDF",
+            "CHE",
+            "CHF",
+            "CHW",
+            "CLF",
+            "CLP",
+            "CNY",
+            "COP",
+            "COU",
+            "CRC",
+            "CUC",
+            "CUP",
+            "CVE",
+            "CZK",
+            "DJF",
+            "DKK",
+            "DOP",
+            "DZD",
+            "EGP",
+            "ERN",
+            "ETB",
+            "EUR",
+            "FJD",
+            "FKP",
+            "GBP",
+            "GEL",
+            "GHS",
+            "GIP",
+            "GMD",
+            "GNF",
+            "GTQ",
+            "GYD",
+            "HKD",
+            "HNL",
+            "HRK",
+            "HTG",
+            "HUF",
+            "IDR",
+            "ILS",
+            "INR",
+            "IQD",
+            "IRR",
+            "ISK",
+            "JMD",
+            "JOD",
+            "JPY",
+            "KES",
+            "KGS",
+            "KHR",
+            "KMF",
+            "KPW",
+            "KRW",
+            "KWD",
+            "KYD",
+            "KZT",
+            "LAK",
+            "LBP",
+            "LKR",
+            "LRD",
+            "LSL",
+            "LYD",
+            "MAD",
+            "MDL",
+            "MGA",
+            "MKD",
+            "MMK",
+            "MNT",
+            "MOP",
+            "MRO",
+            "MUR",
+            "MVR",
+            "MWK",
+            "MXN",
+            "MXV",
+            "MYR",
+            "MZN",
+            "NAD",
+            "NGN",
+            "NIO",
+            "NOK",
+            "NPR",
+            "NZD",
+            "OMR",
+            "PAB",
+            "PEN",
+            "PGK",
+            "PHP",
+            "PKR",
+            "PLN",
+            "PYG",
+            "QAR",
+            "RON",
+            "RSD",
+            "RUB",
+            "RWF",
+            "SAR",
+            "SBD",
+            "SCR",
+            "SDG",
+            "SEK",
+            "SGD",
+            "SHP",
+            "SLL",
+            "SOS",
+            "SRD",
+            "SSP",
+            "STD",
+            "SVC",
+            "SYP",
+            "SZL",
+            "THB",
+            "TJS",
+            "TMT",
+            "TND",
+            "TOP",
+            "TRY",
+            "TTD",
+            "TWD",
+            "TZS",
+            "UAH",
+            "UGX",
+            "USD",
+            "USN",
+            "UYI",
+            "UYU",
+            "UZS",
+            "VEF",
+            "VND",
+            "VUV",
+            "WST",
+            "XAF",
+            "XCD",
+            "XDR",
+            "XOF",
+            "XPF",
+            "XSU",
+            "XUA",
+            "YER",
+            "ZAR",
+            "ZMW",
+            "ZWL"
+          ],
+          "type": "string"
+        },
+        "TipoCambio": {
+          "$ref": "#/definitions/DecimalDineroType",
+          "description": "Tipo de cambio"
+        }
+      },
+      "type": "object"
+    },
+    "DecimalDineroType": {
+      "description": "Tipo de dato decimal para representar los valores de dinero.",
+      "maximum": 10000000000000,
+      "minimum": 0,
+      "type": "number"
+    },
+    "ClaveType": {
+      "description": "Tipo de dato String que solo permite el uso de números con un largo de 50.",
+      "pattern": "\\d{50,50}",
+      "type": "string"
+    },
+    "NumeroConsecutivoType": {
+      "description": "Tipo de dato String que solo permite el uso de números con un largo de 20",
+      "pattern": "\\d{20,20}",
+      "type": "string"
+    },
+    "UnidadMedidaType": {
+      "description": "ohm",
+      "enum": [
+        "1",
+        "´",
+        "´´",
+        "°C",
+        "1/m",
+        "A",
+        "A/m",
+        "A/m²",
+        "Acv",
+        "Al",
+        "Alc",
+        "B",
+        "Bq",
+        "C",
+        "C/kg",
+        "C/m²",
+        "C/m³",
+        "Cc",
+        "Cd",
+        "cd/m²",
+        "Cm",
+        "cm",
+        "Cu",
+        "D",
+        "eV",
+        "F",
+        "F/m",
+        "Fa",
+        "G",
+        "Gal",
+        "Gy",
+        "Gy/s",
+        "h",
+        "H",
+        "H/m",
+        "Hz",
+        "I",
+        "J",
+        "J/(kg·K)",
+        "J/(mol·K)",
+        "J/K",
+        "J/kg",
+        "J/m³",
+        "J/mol",
+        "K",
+        "Kat",
+        "kat/m³",
+        "Kg",
+        "kg/m³",
+        "Km",
+        "Kw",
+        "kWh",
+        "L",
+        "Lm",
+        "Ln",
+        "Lx",
+        "M",
+        "m/s",
+        "m/s²",
+        "m²",
+        "m³",
+        "Min",
+        "mL",
+        "Mm",
+        "Mol",
+        "mol/m³",
+        "N",
+        "N/m",
+        "N·m",
+        "Np",
+        "º",
+        "Os",
+        "Otros",
+        "Oz",
+        "Pa",
+        "Pa·s",
+        "Qq",
+        "Rad",
+        "rad/s",
+        "rad/s²",
+        "S",
+        "s",
+        "Sp",
+        "Spe",
+        "Sr",
+        "St",
+        "Sv",
+        "t",
+        "T",
+        "U",
+        "Ua",
+        "Unid",
+        "V",
+        "V/m",
+        "W",
+        "W/(m·K)",
+        "W/(m²·sr)",
+        "W/m²",
+        "W/sr",
+        "Wb",
+        "Ω"
+      ],
+      "type": "string"
+    },
+    "TipoTransaccionType": {
+      "description": "Sin contraprestación a terceros",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "type": "string"
+    },
+    "CodigoDescuentoType": {
+      "description": "Otros descuentos",
+      "maxLength": 2,
+      "minLength": 2,
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "99"
+      ],
+      "type": "string"
+    },
+    "CodigoImpuestoType": {
+      "description": "Otros",
+      "maxLength": 2,
+      "minLength": 2,
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "12",
+        "99"
+      ],
+      "type": "string"
+    },
+    "CodigoTarifaIVAType": {
+      "description": "Tarifa 0% sin derecho a crédito",
+      "maxLength": 2,
+      "minLength": 2,
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11"
+      ],
+      "type": "string"
+    },
+    "TipoExoneracionType": {
+      "description": "Otros",
+      "maxLength": 2,
+      "minLength": 2,
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "99"
+      ],
+      "type": "string"
+    },
+    "TipoDocOtrosCargosType": {
+      "description": "Otros Cargos",
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "99"
+      ],
+      "type": "string"
+    },
+    "TipoDocReferenciaType": {
+      "description": "Nota de Débito a Factura Electrónica de Compra",
+      "maxLength": 2,
+      "minLength": 2,
+      "enum": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "99",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ],
+      "type": "string"
+    },
+    "CodigoReferenciaType": {
+      "description": "Otros",
+      "maxLength": 2,
+      "minLength": 2,
+      "enum": [
+        "01",
+        "02",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "99"
+      ],
+      "type": "string"
+    },
+    "restrictedString": {
+      "maxLength": 500,
+      "type": "string"
+    }
+  }
+}
