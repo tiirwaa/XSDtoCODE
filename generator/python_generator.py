@@ -3,6 +3,7 @@ import os
 import traceback
 from pathlib import Path
 from generator.base import CodeGeneratorStrategy
+import xsdata
 from xsdata.__main__ import main as xsdata_main
 
 class PythonGenerator(CodeGeneratorStrategy):
