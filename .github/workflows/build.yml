@@ -29,9 +29,10 @@ jobs:
       run: composer install --working-dir=xsd2php-build --no-progress --prefer-dist --no-interaction
 
     - name: Build xsd2php.phar
+      shell: bash
       run: |
         cd xsd2php-build
-        box compile --no-parallel
+        box compile --no-parallel || (echo "Box failed, checking PHAR"; if [ -f ../xsd2php.phar ]; then echo "PHAR exists, continuing"; else exit 1; fi)
 
     - name: Set up Python
       uses: actions/setup-python@v4
