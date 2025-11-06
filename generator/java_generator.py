@@ -60,8 +60,15 @@ class JavaGenerator(CodeGeneratorStrategy):
             env["JAVA_HOME"] = str(base_path / "jdk1.8.0_202")
             env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")    
             
+            java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
+            tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
+            classes_zip = base_path / "jdk1.8.0_202" / "lib" / "classes.zip"
+            classpath = f"{tools_jar};{classes_zip}"
+
             result = subprocess.run([
-                str(jdk_path),
+                str(java_exe),
+                "-cp", str(classpath),
+                "com.sun.tools.internal.xjc.Driver",
                 "-d", str(output_abs_path),
                 "-p", "com.example.generated",
                 "-extension",
