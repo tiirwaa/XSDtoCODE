@@ -77,12 +77,12 @@ class PythonGenerator(CodeGeneratorStrategy):
                     xsdata_main()  # Puede llamar a sys.exit()
                 except SystemExit as e:
                     if e.code != 0:
-                        print(f"❌ xsdata terminó con error (código {e.code})")
+                        print(f"xsdata terminó con error (código {e.code})")
                         raise
 
-                print("✅ Clases Python generadas con éxito usando xsdata.")
+                print("Clases Python generadas con éxito usando xsdata.")
             except Exception as e:
-                print("❌ Error al ejecutar xsdata:")
+                print("Error al ejecutar xsdata:")
                 traceback.print_exc()  # Esto imprimirá el traceback completo
             finally:
                 os.chdir(original_cwd)

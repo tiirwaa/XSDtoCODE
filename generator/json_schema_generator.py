@@ -74,11 +74,11 @@ class JSONSchemaGenerator:
             ], **kwargs)    # Reemplaza caracteres inválidos en lugar de lanzar error
 
             if result.returncode != 0:
-                print("❌ Error al convertir XSD a JSON Schema:")
+                print("Error al convertir XSD a JSON Schema:")
                 print(result.stderr)
                 return False
 
-            print("✅ JSON Schema generado correctamente.")
+            print("JSON Schema generado correctamente.")
             print(result.stdout)
             return True
         finally:

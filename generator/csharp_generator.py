@@ -65,7 +65,7 @@ class CSharpGenerator(CodeGeneratorStrategy):
             result = subprocess.run(command, **kwargs)
 
             if result.returncode != 0:
-                print("❌ Error al ejecutar XmlSchemaClassGenerator:")
+                print("Error al ejecutar XmlSchemaClassGenerator:")
                 if result.stderr:
                     print(result.stderr)
                 if result.stdout:
@@ -75,7 +75,7 @@ class CSharpGenerator(CodeGeneratorStrategy):
                     print("No se devolvió ningún mensaje de error.")
                 raise Exception("XmlSchemaClassGenerator falló con código de salida {}".format(result.returncode))
             else:
-                print("✅ Clases C# generadas con éxito.")
+                print("Clases C# generadas con éxito.")
                 print(result.stdout)
         finally:
             # Limpiar directorio temporal

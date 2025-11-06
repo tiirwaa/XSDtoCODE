@@ -67,7 +67,7 @@ class JavaGenerator(CodeGeneratorStrategy):
             ], env=env, **kwargs)
 
             if result.returncode != 0:
-                print("❌ Error al ejecutar xjc:")
+                print("Error al ejecutar xjc:")
                 if result.stderr:
                     print(result.stderr)
                 if result.stdout:
@@ -77,7 +77,7 @@ class JavaGenerator(CodeGeneratorStrategy):
                     print("No se devolvió ningún mensaje de error.")
                 raise Exception("xjc falló con código de salida {}".format(result.returncode))
             else:
-                print("✅ Clases Java generadas con éxito.")
+                print("Clases Java generadas con éxito.")
                 print(result.stdout)
                 return True
         finally:
