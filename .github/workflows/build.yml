@@ -72,9 +72,9 @@ jobs:
         name: XSDtoCODE-EXE
         path: XSDtoCODE-EXE/
 
-    - name: Create 7z
+    - name: Create ZIP
       run: |
-        7z a XSDtoCODE-${{ github.ref_name }}.7z XSDtoCODE-EXE/
+        zip -r XSDtoCODE-${{ github.ref_name }}.zip XSDtoCODE-EXE/
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -87,4 +87,4 @@ jobs:
           Descarga el EXE empaquetado desde los assets.
         draft: false
         prerelease: false
-        files: ./XSDtoCODE-${{ github.ref_name }}.7z
+        files: ./XSDtoCODE-${{ github.ref_name }}.zip
