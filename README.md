@@ -4,7 +4,7 @@
 
 **XSDtoCODE** es una herramienta escrita en **Python**, diseñada para automatizar la generación de clases a partir de archivos **XSD** (XML Schema Definition). Su propósito principal es simplificar la integración de esquemas XML en proyectos de software modernos, permitiendo que los desarrolladores trabajen directamente con **objetos y clases de programación** en lugar de manipular XML manualmente. Esto asegura que las clases generadas reflejen con precisión el esquema definido y pueden **serializarse y deserializarse automáticamente a XML**, eliminando errores y esfuerzo manual.
 
-La herramienta es compatible con múltiples lenguajes de programación, incluyendo **Java**, **C#**, **Python** y **JSONSchema**, lo que la hace ideal para entornos heterogéneos y proyectos que requieren consistencia entre sistemas que usan distintos lenguajes. Al soportar varios lenguajes, XSDtoCODE permite:
+La herramienta es compatible con múltiples lenguajes de programación, incluyendo **Java**, **C#**, **Python**, **PHP** y **JSONSchema**, lo que la hace ideal para entornos heterogéneos y proyectos que requieren consistencia entre sistemas que usan distintos lenguajes. Al soportar varios lenguajes, XSDtoCODE permite:
 
 - Generar **modelos de datos robustos y confiables** directamente desde el esquema XSD.  
 - Reducir errores humanos asociados con la creación manual de XML o clases.  
@@ -16,7 +16,8 @@ Para cada lenguaje, XSDtoCODE utiliza generadores especializados:
 - **Java**: `xjc`, que convierte esquemas XSD en clases Java listas para serializar/deserializar XML.  
 - **C#**: `XmlSchemaClassGenerator`, que crea clases .NET compatibles con el esquema XML.  
 - **Python**: `xsdata`, que genera clases Python modernas con soporte completo para serialización y deserialización automática de XML.  
-- **JSON**: `xsd2jsonschema`, que transforma XSD en esquemas JSON, permitiendo interoperabilidad con aplicaciones que usan JSON basado en XML.
+- **PHP**: Script personalizado con PHP embebido, que genera clases PHP con propiedades tipadas basadas en el esquema XSD.  
+- **JSONSchema**: `xsd2jsonschema`, que transforma XSD en esquemas JSON, permitiendo interoperabilidad con aplicaciones que usan JSON basado en XML.
 
 Entre los principales beneficios de usar XSDtoCODE se incluyen:  
 
@@ -65,6 +66,7 @@ pip install "xsdata[cli]"
 - Java
 - C#
 - Python
+- PHP
 - JSONSchema
 
 ---
@@ -72,17 +74,28 @@ pip install "xsdata[cli]"
 ## 🖥️ Uso en Consola
 
 ```bash
-python main.py "archivo.xsd" "java|python|csharp|JSONSchema" "carpeta_salida"
+python main.py "archivo.xsd" "java|python|csharp|php|JSONSchema" "carpeta_salida"
 ```
 
 ```bash
-main.exe "archivo.xsd" "java|python|csharp|JSONSchema" "carpeta_salida"
+main.exe "archivo.xsd" "java|python|csharp|php|JSONSchema" "carpeta_salida"
 ```
 
 ## ⚙️ Generar EXE
 ```bash
 generar_exe.bat
 ```
+
+## 🐘 PHP Portable
+
+XSDtoCODE incluye **PHP completamente portable** (versión 8.3.27), lo que significa que **no requiere instalación previa de PHP** en el sistema. El ejecutable incluye:
+
+- PHP 8.3.27 Thread Safe para Windows x64
+- Todas las extensiones estándar de PHP
+- Script personalizado de conversión XSD a PHP
+- Configuración mínima de `php.ini`
+
+Esto garantiza que la generación de clases PHP funcione en cualquier sistema Windows sin dependencias externas.
 
 
 ##  
