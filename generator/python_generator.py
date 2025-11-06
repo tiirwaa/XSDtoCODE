@@ -73,6 +73,9 @@ class PythonGenerator(CodeGeneratorStrategy):
 
                     subprocess.Popen = patched_popen  
 
+                # Ensure ruff is in PATH
+                os.environ["PATH"] = os.environ.get("PATH", "") + os.pathsep + str(Path(sys.executable).parent)
+
                 try:
                     xsdata_main()  # Puede llamar a sys.exit()
                 except SystemExit as e:

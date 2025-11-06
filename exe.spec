@@ -49,7 +49,14 @@ a_main = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[],  # Datos específicos para la consola
+    datas=[  # Datos específicos para la consola
+        ('jdk1.8.0_202', 'jdk1.8.0_202'),
+        ('csharp', 'csharp'),
+        ('schemas', 'schemas'),
+        ('node', 'node'),
+        ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
+        ('.venv/Scripts/ruff.exe', 'bin')
+    ],
     hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff', 'typing-extensions'],
     hookspath=[],
     hooksconfig={},
