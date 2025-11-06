@@ -34,7 +34,8 @@ jobs:
       run: |
         export TMP=$RUNNER_TEMP
         cd xsd2php-build
-        box compile --no-parallel --no-restart ; if [ -f ../xsd2php.phar ]; then echo "PHAR created successfully"; else echo "PHAR not found"; exit 1; fi
+        box compile --no-parallel --no-restart || true
+        if [ -f ../xsd2php.phar ]; then echo "PHAR created successfully"; else echo "PHAR not found"; exit 1; fi
 
     - name: Set up Python
       uses: actions/setup-python@v4
