@@ -24,7 +24,7 @@ class JavaGenerator(CodeGeneratorStrategy):
         else:
             base_path = Path(__file__).parent.parent
 
-        jdk_path = base_path / "jdk" / "bin" / "xjc.exe"
+        jdk_path = base_path / "jdk1.8.0_202" / "bin" / "xjc.exe"
 
         xsd_abs_path = os.path.abspath(xsd_file_path)
         output_abs_path = os.path.abspath(self.output_folder)
@@ -62,18 +62,16 @@ class JavaGenerator(CodeGeneratorStrategy):
 
             env = os.environ.copy()
             env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"
-            env["JAVA_HOME"] = str(base_path / "jdk")
-            env["PATH"] = str(base_path / "jdk" / "bin") + os.pathsep + env.get("PATH", "")    
+            env["JAVA_HOME"] = str(base_path / "jdk1.8.0_202")
+            env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")    
             
-            java_exe = base_path / "jdk" / "bin" / "java.exe"
-            tools_jar = base_path / "jdk" / "lib" / "tools.jar"
-            classes_zip = base_path / "jdk" / "lib" / "classes.zip"
+            java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
+            tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
+            classes_zip = base_path / "jdk1.8.0_202" / "lib" / "classes.zip"
             classpath = f"{tools_jar};{classes_zip}"
 
             result = subprocess.run([
-                str(java_exe),
-                "-cp", str(classpath),
-                "com.sun.tools.internal.xjc.Driver",
+                str(jdk_path),
                 "-d", str(output_abs_path),
                 "-p", "com.example.generated",
                 "-extension",

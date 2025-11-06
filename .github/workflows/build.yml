@@ -51,7 +51,7 @@ jobs:
       run: |
         New-Item -ItemType Directory -Force -Path dist\XSDtoCODE\_internal
         Copy-Item -Path xsd2php.phar -Destination dist\XSDtoCODE\_internal\xsd2php.phar -Force
-        Copy-Item -Path jdk1.8.0_202 -Destination dist\XSDtoCODE\_internal\jdk -Recurse -Force
+        Copy-Item -Path jdk1.8.0_202 -Destination dist\XSDtoCODE\_internal\jdk1.8.0_202 -Recurse -Force
         Copy-Item -Path schemas -Destination dist\XSDtoCODE\_internal\schemas -Recurse -Force
 
     - name: Upload build artifacts
