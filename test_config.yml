@@ -1,0 +1,5 @@
+﻿xsd:
+  file: schemas\xmldsig-core-schema.xsd
+generator:
+  folder: test_php_output
+  namespace: Generated

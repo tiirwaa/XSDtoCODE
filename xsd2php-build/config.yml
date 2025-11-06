@@ -1,0 +1,7 @@
+xsd:
+  file: ../schemas/xmldsig-core-schema.xsd
+
+generator:
+  destinations:
+    - folder: ../output_php
+      namespace: Generated

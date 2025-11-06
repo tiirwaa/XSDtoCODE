@@ -1,0 +1,8 @@
+{
+    "require": {
+        "goetas-webservices/xsd2php": "^0.4.14"
+    },
+    "require-dev": {
+        "humbug/box": "^4.6"
+    }
+}

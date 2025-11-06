@@ -12,7 +12,6 @@ a_gui = Analysis(
         ('schemas', 'schemas'),
         ('node', 'node'),
         ('php', 'php'),
-        ('xsd2php.php', '.'),
         ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
         ('.venv/Scripts/ruff.exe', 'bin')
     ],
@@ -57,7 +56,6 @@ a_main = Analysis(
         ('schemas', 'schemas'),
         ('node', 'node'),
         ('php', 'php'),
-        ('xsd2php.php', '.'),
         ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
         ('.venv/Scripts/ruff.exe', 'bin')
     ],

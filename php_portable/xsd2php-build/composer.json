@@ -1,0 +1,9 @@
+{
+    "require": {
+        "goetas/xsd2php": "^0.4.2"
+    },
+    "config": {
+        "disable-tls": true,
+        "secure-http": false
+    }
+}

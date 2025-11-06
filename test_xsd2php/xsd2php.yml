@@ -1,0 +1,6 @@
+﻿namespaces:
+  'http://www.w3.org/2000/09/xmldsig#': Generated
+destinations_php:
+  Generated: ..\test_php_phar_output
+destinations_jms:
+  Generated: ..\test_php_phar_output

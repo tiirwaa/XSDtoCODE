@@ -15,13 +15,17 @@ class PHPGenerator(CodeGeneratorStrategy):
         """
         Utiliza xsd2php.phar con PHP portable para generar clases PHP.
         """
+        base_path = Path(__file__).parent.parent
+        
         if getattr(sys, 'frozen', False):
-            base_path = Path(sys._MEIPASS)
+            # Cuando está empaquetado, buscar archivos en el directorio _internal
+            exe_dir = Path(sys.executable).parent
+            internal_dir = exe_dir / "_internal"
+            php_exe = internal_dir / "php" / "php.exe"
+            xsd2php_phar = exe_dir / "xsd2php.phar"
         else:
-            base_path = Path(__file__).parent.parent
-
-        php_exe = base_path / "php" / "php.exe"
-        xsd2php_script = base_path / "xsd2php.php"
+            php_exe = base_path / "php" / "php.exe"
+            xsd2php_phar = base_path / "xsd2php.phar"
 
         xsd_abs_path = os.path.abspath(xsd_file_path)
         output_abs_path = os.path.abspath(self.output_folder)
@@ -43,6 +47,16 @@ class PHPGenerator(CodeGeneratorStrategy):
             if schema_src.exists():
                 shutil.copy(schema_src, temp_dir)
 
+            # Create config file for xsd2php
+            config_content = f"""xsd2php:
+  destinations_php:
+    folder: {output_abs_path}
+    namespace: Generated
+"""
+            config_file = os.path.join(temp_dir, 'config.yml')
+            with open(config_file, 'w', encoding='utf-8') as f:
+                f.write(config_content)
+
             kwargs = {
                 "capture_output": True,
                 "text": True,
@@ -56,10 +70,10 @@ class PHPGenerator(CodeGeneratorStrategy):
 
             result = subprocess.run([
                 str(php_exe),
-                str(xsd2php_script),
-                str(xsd_temp_path),
-                str(output_abs_path),
-                "Generated"
+                str(xsd2php_phar),
+                "convert",
+                config_file,
+                xsd_temp_path
             ], env=env, **kwargs)
 
             if result.returncode != 0:
