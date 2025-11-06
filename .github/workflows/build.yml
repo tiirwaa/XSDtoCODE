@@ -56,7 +56,7 @@ jobs:
 
     - name: Create ZIP
       run: |
-        zip -r XSDtoCODE-v${{ github.ref_name }}.zip XSDtoCODE-EXE/
+        zip -r XSDtoCODE-${{ github.ref_name }}.zip XSDtoCODE-EXE/
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -69,4 +69,4 @@ jobs:
           Descarga el EXE empaquetado desde los assets.
         draft: false
         prerelease: false
-        files: ./XSDtoCODE-v${{ github.ref_name }}.zip
+        files: ./XSDtoCODE-${{ github.ref_name }}.zip
