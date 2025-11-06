@@ -28,7 +28,7 @@ jobs:
       run: |
         python -m venv .venv
         ./.venv/Scripts/python -m pip install --upgrade pip
-        ./.venv/Scripts/pip install pyinstaller xsdata click jinja2 toposort ruff
+        ./.venv/Scripts/pip install pyinstaller xsdata click jinja2 toposort ruff pillow
 
     - name: Build EXE
       run: |
