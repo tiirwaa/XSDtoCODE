@@ -24,32 +24,65 @@ class JavaGenerator(CodeGeneratorStrategy):
 
         jdk_path = base_path / "jdk1.8.0_202" / "bin" / "xjc"
 
-        kwargs = {
-            "capture_output": True,
-            "text": True
-        }
-        if sys.platform == "win32":
-            kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
+        xsd_abs_path = os.path.abspath(xsd_file_path)
+        output_abs_path = os.path.abspath(self.output_folder)
 
-        env = os.environ.copy()
-        env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"    
-        
-        result = subprocess.run([
-            str(jdk_path),
-            "-d", str(self.output_folder),
-            "-p", "com.example.generated",
-            "-extension",
-            str(xsd_file_path)
-        ], env=env, **kwargs)
+        # Crear directorio temporal y copiar archivos necesarios
+        import tempfile
+        import shutil
+        import re
+        temp_dir = tempfile.mkdtemp()
+        try:
+            # Copiar el XSD del usuario al temp dir, modificando schemaLocation si es necesario
+            xsd_temp_path = os.path.join(temp_dir, os.path.basename(xsd_abs_path))
+            with open(xsd_abs_path, 'r', encoding='utf-8') as f:
+                xsd_content = f.read()
+            # Reemplazar rutas de xmldsig-core-schema.xsd con relativa
+            xsd_content = re.sub(r'schemaLocation="[^"]*xmldsig-core-schema\.xsd"', 'schemaLocation="xmldsig-core-schema.xsd"', xsd_content)
+            with open(xsd_temp_path, 'w', encoding='utf-8') as f:
+                f.write(xsd_content)
 
-        if result.returncode != 0:
-            print("❌ Error al ejecutar xjc:")
-            print(result.stderr)
-            return False
-        else:
-            print("✅ Clases Java generadas con éxito.")
-            print(result.stdout)
-            return True
+            # Copiar el esquema xmldsig si existe
+            schema_src = base_path / "csharp" / "xmldsig-core-schema.xsd"
+            if schema_src.exists():
+                shutil.copy(schema_src, temp_dir)
+
+            kwargs = {
+                "capture_output": True,
+                "text": True,
+                "cwd": temp_dir
+            }
+            if sys.platform == "win32":
+                kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
+
+            env = os.environ.copy()
+            env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"    
+            
+            result = subprocess.run([
+                str(jdk_path),
+                "-d", str(output_abs_path),
+                "-p", "com.example.generated",
+                "-extension",
+                str(xsd_temp_path)
+            ], env=env, **kwargs)
+
+            if result.returncode != 0:
+                print("❌ Error al ejecutar xjc:")
+                if result.stderr:
+                    print(result.stderr)
+                if result.stdout:
+                    print("Salida estándar:")
+                    print(result.stdout)
+                if not result.stderr and not result.stdout:
+                    print("No se devolvió ningún mensaje de error.")
+                raise Exception("xjc falló con código de salida {}".format(result.returncode))
+            else:
+                print("✅ Clases Java generadas con éxito.")
+                print(result.stdout)
+                return True
+        finally:
+            # Limpiar directorio temporal
+            shutil.rmtree(temp_dir)
         
 
     def generar_header_personalizado(self):

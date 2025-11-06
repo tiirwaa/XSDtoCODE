@@ -158,6 +158,7 @@ class XSDToolGUI:
                 self.root.after(0, lambda: messagebox.showinfo("Éxito", "Código generado correctamente."))
             except Exception as e:
                 error_message = f"Ocurrió un error: {str(e)}\n\n{traceback.format_exc()}"
+                print(error_message)  # Imprimir el error en consola
                 self.root.after(0, lambda: messagebox.showerror("Error", error_message))
             finally:
                 self.root.after(0, loading_win.destroy)
