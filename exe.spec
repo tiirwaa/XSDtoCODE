@@ -14,7 +14,7 @@ a_gui = Analysis(
         ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
         ('.venv/Scripts/ruff.exe', 'bin')
     ],
-    hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff', 'typing-extensions'],
+    hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -57,7 +57,7 @@ a_main = Analysis(
         ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
         ('.venv/Scripts/ruff.exe', 'bin')
     ],
-    hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff', 'typing-extensions'],
+    hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
