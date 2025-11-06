@@ -1,0 +1,6 @@
+{
+  "main": "vendor/goetas-webservices/xsd2php/src/Console/Application.php",
+  "output": "../xsd2php.phar",
+  "compression": "GZ",
+  "stub": true
+}

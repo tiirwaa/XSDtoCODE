@@ -19,6 +19,20 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up PHP for PHAR build
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        tools: composer, box
+
+    - name: Install xsd2php dependencies
+      run: composer install --working-dir=xsd2php-build --no-progress --prefer-dist --no-interaction
+
+    - name: Build xsd2php.phar
+      run: |
+        cd xsd2php-build
+        box compile
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -33,6 +47,11 @@ jobs:
     - name: Build EXE
       run: |
         ./.venv/Scripts/pyinstaller exe.spec
+
+    - name: Place xsd2php.phar inside bundle
+      run: |
+        New-Item -ItemType Directory -Force -Path dist\XSDtoCODE\_internal
+        Copy-Item -Path xsd2php.phar -Destination dist\XSDtoCODE\_internal\xsd2php.phar -Force
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4

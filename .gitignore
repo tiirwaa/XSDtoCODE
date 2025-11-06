@@ -171,3 +171,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+# Custom large artifacts
+xsd2php.phar

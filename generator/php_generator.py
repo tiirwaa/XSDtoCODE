@@ -163,7 +163,7 @@ class PHPGenerator(CodeGeneratorStrategy):
             exe_dir = Path(sys.executable).parent
             internal_dir = exe_dir / "_internal"
             php_exe = internal_dir / "php" / "php.exe"
-            xsd2php_phar = exe_dir / "xsd2php.phar"
+            xsd2php_phar = internal_dir / "xsd2php.phar"
         else:
             php_exe = base_path / "php" / "php.exe"
             xsd2php_phar = base_path / "xsd2php.phar"
