@@ -67,8 +67,7 @@ class JavaGenerator(CodeGeneratorStrategy):
             
             java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
             tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
-            classes_zip = base_path / "jdk1.8.0_202" / "lib" / "classes.zip"
-            classpath = f"{tools_jar};{classes_zip}"
+            classpath = str(tools_jar)
 
             result = subprocess.run([
                 str(java_exe),
