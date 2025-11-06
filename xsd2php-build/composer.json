@@ -1,0 +1,5 @@
+{
+    "require": {
+        "goetas-webservices/xsd2php": "dev-master"
+    }
+}
