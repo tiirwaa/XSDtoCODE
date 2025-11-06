@@ -18,11 +18,13 @@ class JavaGenerator(CodeGeneratorStrategy):
         Utiliza xjc desde el JDK local para generar clases Java.
         """
         if getattr(sys, 'frozen', False):
-            base_path = Path(sys._MEIPASS)
+            exe_dir = Path(sys.executable).parent
+            internal_dir = exe_dir / "_internal"
+            base_path = internal_dir
         else:
             base_path = Path(__file__).parent.parent
 
-        jdk_path = base_path / "jdk1.8.0_202" / "bin" / "xjc"
+        jdk_path = base_path / "jdk" / "bin" / "xjc.exe"
 
         xsd_abs_path = os.path.abspath(xsd_file_path)
         output_abs_path = os.path.abspath(self.output_folder)
@@ -43,7 +45,10 @@ class JavaGenerator(CodeGeneratorStrategy):
                 f.write(xsd_content)
 
             # Copiar el esquema xmldsig si existe
-            schema_src = base_path / "schemas" / "xmldsig-core-schema.xsd"
+            if getattr(sys, 'frozen', False):
+                schema_src = base_path / "schemas" / "xmldsig-core-schema.xsd"
+            else:
+                schema_src = Path(__file__).parent.parent / "schemas" / "xmldsig-core-schema.xsd"
             if schema_src.exists():
                 shutil.copy(schema_src, temp_dir)
 
@@ -57,12 +62,12 @@ class JavaGenerator(CodeGeneratorStrategy):
 
             env = os.environ.copy()
             env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"
-            env["JAVA_HOME"] = str(base_path / "jdk1.8.0_202")
-            env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")    
+            env["JAVA_HOME"] = str(base_path / "jdk")
+            env["PATH"] = str(base_path / "jdk" / "bin") + os.pathsep + env.get("PATH", "")    
             
-            java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
-            tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
-            classes_zip = base_path / "jdk1.8.0_202" / "lib" / "classes.zip"
+            java_exe = base_path / "jdk" / "bin" / "java.exe"
+            tools_jar = base_path / "jdk" / "lib" / "tools.jar"
+            classes_zip = base_path / "jdk" / "lib" / "classes.zip"
             classpath = f"{tools_jar};{classes_zip}"
 
             result = subprocess.run([
