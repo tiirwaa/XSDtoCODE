@@ -24,6 +24,7 @@ jobs:
       with:
         php-version: '8.2'
         tools: composer, box
+        ini-values: phar.readonly=0
 
     - name: Install xsd2php dependencies
       run: composer install --working-dir=xsd2php-build --no-progress --prefer-dist --no-interaction
