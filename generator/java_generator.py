@@ -19,12 +19,11 @@ class JavaGenerator(CodeGeneratorStrategy):
         """
         if getattr(sys, 'frozen', False):
             exe_dir = Path(sys.executable).parent
-            internal_dir = exe_dir / "_internal"
-            base_path = internal_dir
+            base_path = exe_dir
         else:
             base_path = Path(__file__).parent.parent
 
-        jdk_path = base_path / "jdk1.8.0_202" / "bin" / "xjc.exe"
+        jdk_path = base_path / "jdk1.8.0_202"
 
         xsd_abs_path = os.path.abspath(xsd_file_path)
         output_abs_path = os.path.abspath(self.output_folder)
