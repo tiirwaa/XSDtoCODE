@@ -66,27 +66,46 @@ class JavaGenerator(CodeGeneratorStrategy):
                 kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
 
             env = os.environ.copy()
-            env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"
+            # env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"  # Commented out to avoid issues
             env["JAVA_HOME"] = str(base_path / "jdk1.8.0_202")
             env["JRE_HOME"] = str(base_path / "jdk1.8.0_202")
             env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")    
             
             java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
-            tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
-            dt_jar = base_path / "jdk1.8.0_202" / "lib" / "dt.jar"
-            classpath = f"{tools_jar}{os.pathsep}{dt_jar}"
+            xjc_exe = base_path / "jdk1.8.0_202" / "bin" / "xjc.exe"
+            
+            if xjc_exe.exists():
+                # Usar xjc.exe directamente si está disponible
+                print(f"Usando xjc.exe: {xjc_exe}")
+                cmd = [
+                    str(xjc_exe),
+                    "-d", str(output_abs_path),
+                    "-p", "com.example.generated",
+                    "-extension",
+                    "-nv",  # No validation to avoid JDK 8 bug
+                    str(xsd_temp_path)
+                ]
+                print(f"Ejecutando comando: {' '.join(cmd)}")
+                result = subprocess.run(cmd, env=env, **kwargs)
+            else:
+                # Usar java con clase internal como fallback
+                tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
+                dt_jar = base_path / "jdk1.8.0_202" / "lib" / "dt.jar"
+                classpath = f"{tools_jar}{os.pathsep}{dt_jar}"
 
-            print(f"java_exe: {java_exe}")
-            print(f"exists: {java_exe.exists()}")
-            result = subprocess.run([
-                str(java_exe),
-                "-cp", str(classpath),
-                "com.sun.tools.internal.xjc.Driver",
-                "-d", str(output_abs_path),
-                "-p", "com.example.generated",
-                "-extension",
-                str(xsd_temp_path)
-            ], env=env, **kwargs)
+                print(f"java_exe: {java_exe}")
+                print(f"exists: {java_exe.exists()}")
+                cmd = [
+                    str(java_exe),
+                    "-cp", str(classpath),
+                    "com.sun.tools.internal.xjc.Driver",
+                    "-d", str(output_abs_path),
+                    "-p", "com.example.generated",
+                    "-extension",
+                    str(xsd_temp_path)
+                ]
+                print(f"Ejecutando comando: {' '.join(cmd)}")
+                result = subprocess.run(cmd, env=env, **kwargs)
 
             if result.returncode != 0:
                 print("Error al ejecutar xjc:")
@@ -100,7 +119,8 @@ class JavaGenerator(CodeGeneratorStrategy):
                 raise Exception("xjc falló con código de salida {}".format(result.returncode))
             else:
                 print("Clases Java generadas con éxito.")
-                print(result.stdout)
+                if result.stdout:
+                    print(result.stdout)
                 return True
         finally:
             # Limpiar directorio temporal

@@ -159,15 +159,32 @@ class PHPGenerator(CodeGeneratorStrategy):
         """
         # Configurar logging
         log_file = Path(self.output_folder) / 'generation.log'
-        logging.basicConfig(filename=str(log_file), level=logging.INFO, 
-                            format='%(asctime)s - %(levelname)s - %(message)s', 
-                            datefmt='%Y-%m-%d %H:%M:%S')
+        logger = logging.getLogger()
+        logger.setLevel(logging.INFO)
+        
+        # Handler para archivo
+        file_handler = logging.FileHandler(str(log_file))
+        file_handler.setLevel(logging.INFO)
+        file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+        file_handler.setFormatter(file_formatter)
+        
+        # Handler para consola
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)
+        console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+        console_handler.setFormatter(console_formatter)
+        
+        logger.addHandler(file_handler)
+        logger.addHandler(console_handler)
         
         print("Iniciando generación de clases PHP")
         logging.info("Iniciando generación de clases PHP")
         if getattr(sys, 'frozen', False):
             # Si se ejecuta desde el archivo empaquetado
             base_path = Path(sys._MEIPASS)
+            # Ajustar rutas para archivos bundled
+            if xsd_file_path.startswith("schemas\\") or xsd_file_path.startswith("schemas/"):
+                xsd_file_path = str(base_path / xsd_file_path)
         else:
             # Si se ejecuta desde el código fuente
             base_path = Path(__file__).parent.parent
@@ -226,6 +243,11 @@ class PHPGenerator(CodeGeneratorStrategy):
             if schema_src.exists():
                 shutil.copy(schema_src, temp_dir)
 
+            # Copiar xsd2php.phar al temp_dir
+            phar_src = base_path / "xsd2php.phar"
+            phar_dest = os.path.join(temp_dir, "xsd2php.phar")
+            shutil.copy(phar_src, temp_dir)
+
             # Create config file for xsd2php
             def namespace_destination_path(php_ns: str, base_path: Path) -> Path:
                 ns_parts = php_ns.split("\\")
@@ -263,11 +285,14 @@ class PHPGenerator(CodeGeneratorStrategy):
             config_file = os.path.join(temp_dir, 'config.yml')
             with open(config_file, 'w', encoding='utf-8') as f:
                 f.write(config_content)
+            
+            print(f"Config content:\n{config_content}")
+            logging.info(f"Config content:\n{config_content}")
 
             kwargs = {
                 "capture_output": True,
                 "text": True,
-                "cwd": str(base_path)
+                "cwd": temp_dir
             }
             if sys.platform == "win32":
                 kwargs["creationflags"] = subprocess.CREATE_NO_WINDOW
@@ -279,7 +304,7 @@ class PHPGenerator(CodeGeneratorStrategy):
             logging.info("Ejecutando comando xsd2php...")
             result = subprocess.run([
                 str(php_exe),
-                str(xsd2php_phar),
+                "xsd2php.phar",
                 "convert",
                 config_file,
                 xsd_temp_path
@@ -305,9 +330,16 @@ class PHPGenerator(CodeGeneratorStrategy):
                 success_msg = "Clases PHP generadas con éxito."
                 print(success_msg)
                 logging.info(success_msg)
+                print(f"Return code: {result.returncode}")
+                logging.info(f"Return code: {result.returncode}")
                 if result.stdout:
+                    print("Salida estándar:")
                     print(result.stdout)
-                    logging.info(result.stdout)
+                    logging.info("Salida estándar: " + result.stdout)
+                if result.stderr:
+                    print("Salida de error:")
+                    print(result.stderr)
+                    logging.error("Salida de error: " + result.stderr)
                 return True
         finally:
             # Limpiar directorio temporal

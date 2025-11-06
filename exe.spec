@@ -11,10 +11,11 @@ a_gui = Analysis(
         ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
         ('.venv/Scripts/ruff.exe', 'bin')
     ],
-    datas=[  # Datos específicos para la GUI
+    datas=[
         ('logo.png', '.'),
         ('iconogui.ico', '.'),
         ('iconomain.ico', '.'),
+        ('xsd2php.phar', '.'),
     ],
     hiddenimports=['xsdata', 'xsdata.cli', 'xsdata.codegen', 'xsdata.formats', 'xsdata.formats.dataclass', 'xsdata.models', 'xsdata.parsers', 'xsdata.writers', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],
@@ -25,7 +26,6 @@ a_gui = Analysis(
     optimize=0,
 )
 
-# EXE para GUI (ventana sin consola)
 pyz_gui = PYZ(a_gui.pure)
 exe_gui = EXE(
     pyz_gui,
@@ -59,7 +59,11 @@ a_main = Analysis(
         ('.venv/Lib/site-packages/xsdata/formats/dataclass/templates', 'xsdata/formats/dataclass/templates'),
         ('.venv/Scripts/ruff.exe', 'bin')
     ],
-    datas=[  # Datos específicos para la consola
+    datas=[
+        ('logo.png', '.'),
+        ('iconogui.ico', '.'),
+        ('iconomain.ico', '.'),
+        ('xsd2php.phar', '.'),
     ],
     hiddenimports=['xsdata', 'xsdata.cli', 'xsdata.codegen', 'xsdata.formats', 'xsdata.formats.dataclass', 'xsdata.models', 'xsdata.parsers', 'xsdata.writers', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],
@@ -70,7 +74,6 @@ a_main = Analysis(
     optimize=0,
 )
 
-# EXE para MAIN (consola)
 pyz_main = PYZ(a_main.pure)
 exe_main = EXE(
     pyz_main,
