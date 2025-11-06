@@ -31,6 +31,8 @@ jobs:
     - name: Build xsd2php.phar
       shell: bash
       run: |
+        mkdir -p temp
+        export TMPDIR=$PWD/temp
         cd xsd2php-build
         box compile --no-parallel || (echo "Box failed, checking PHAR"; if [ -f ../xsd2php.phar ]; then echo "PHAR exists, continuing"; else exit 1; fi)
 
