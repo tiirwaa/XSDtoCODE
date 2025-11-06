@@ -5,7 +5,6 @@ from pathlib import Path
 import fileinput
 import datetime
 from generator.base import CodeGeneratorStrategy
-import logging
 
 class JavaGenerator(CodeGeneratorStrategy):
     def generate(self, xsd_path):
@@ -18,14 +17,14 @@ class JavaGenerator(CodeGeneratorStrategy):
         """
         Utiliza xjc desde el JDK local para generar clases Java.
         """
-        # Configurar logging
-        log_file = Path(self.output_folder) / 'generation.log'
-        logging.basicConfig(filename=str(log_file), level=logging.INFO, 
-                            format='%(asctime)s - %(levelname)s - %(message)s', 
-                            datefmt='%Y-%m-%d %H:%M:%S')
-        
-        print("Iniciando generación de clases Java")
-        logging.info("Iniciando generación de clases Java")
+        if getattr(sys, 'frozen', False):
+            # Si se ejecuta desde el archivo empaquetado
+            base_path = Path(sys._MEIPASS)
+        else:
+            # Si se ejecuta desde el código fuente
+            base_path = Path(__file__).parent.parent
+
+        jdk_path = base_path / "jdk1.8.0_202"
         if getattr(sys, 'frozen', False):
             # Si se ejecuta desde el archivo empaquetado
             base_path = Path(sys._MEIPASS)
@@ -70,31 +69,15 @@ class JavaGenerator(CodeGeneratorStrategy):
             env["JAVA_TOOL_OPTIONS"] = "-Dfile.encoding=UTF-8"
             env["JAVA_HOME"] = str(base_path / "jdk1.8.0_202")
             env["JRE_HOME"] = str(base_path / "jdk1.8.0_202")
-            env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")
-            
-            print(f"JAVA_HOME: {env['JAVA_HOME']}")
-            logging.info(f"JAVA_HOME: {env['JAVA_HOME']}")
-            print(f"JRE_HOME: {env['JRE_HOME']}")
-            logging.info(f"JRE_HOME: {env['JRE_HOME']}")
-            print(f"PATH: {env['PATH']}")
-            logging.info(f"PATH: {env['PATH']}")    
+            env["PATH"] = str(base_path / "jdk1.8.0_202" / "bin") + os.pathsep + env.get("PATH", "")    
             
             java_exe = base_path / "jdk1.8.0_202" / "bin" / "java.exe"
             tools_jar = base_path / "jdk1.8.0_202" / "lib" / "tools.jar"
             dt_jar = base_path / "jdk1.8.0_202" / "lib" / "dt.jar"
             classpath = f"{tools_jar}{os.pathsep}{dt_jar}"
 
-            print(f"java_exe: {java_exe}, exists: {java_exe.exists()}")
-            logging.info(f"java_exe: {java_exe}, exists: {java_exe.exists()}")
-            print(f"tools_jar: {tools_jar}, exists: {tools_jar.exists()}")
-            logging.info(f"tools_jar: {tools_jar}, exists: {tools_jar.exists()}")
-            print(f"dt_jar: {dt_jar}, exists: {dt_jar.exists()}")
-            logging.info(f"dt_jar: {dt_jar}, exists: {dt_jar.exists()}")
-            print(f"classpath: {classpath}")
-            logging.info(f"classpath: {classpath}")
-
-            print("Ejecutando comando xjc...")
-            logging.info("Ejecutando comando xjc...")
+            print(f"java_exe: {java_exe}")
+            print(f"exists: {java_exe.exists()}")
             result = subprocess.run([
                 str(java_exe),
                 "-cp", str(classpath),
@@ -106,27 +89,18 @@ class JavaGenerator(CodeGeneratorStrategy):
             ], env=env, **kwargs)
 
             if result.returncode != 0:
-                error_msg = "Error al ejecutar xjc:"
-                print(error_msg)
-                logging.error(error_msg)
+                print("Error al ejecutar xjc:")
                 if result.stderr:
                     print(result.stderr)
-                    logging.error(result.stderr)
                 if result.stdout:
                     print("Salida estándar:")
                     print(result.stdout)
-                    logging.info("Salida estándar: " + result.stdout)
                 if not result.stderr and not result.stdout:
-                    no_error_msg = "No se devolvió ningún mensaje de error."
-                    print(no_error_msg)
-                    logging.warning(no_error_msg)
+                    print("No se devolvió ningún mensaje de error.")
                 raise Exception("xjc falló con código de salida {}".format(result.returncode))
             else:
-                success_msg = "Clases Java generadas con éxito."
-                print(success_msg)
-                logging.info(success_msg)
+                print("Clases Java generadas con éxito.")
                 print(result.stdout)
-                logging.info(result.stdout)
                 return True
         finally:
             # Limpiar directorio temporal
