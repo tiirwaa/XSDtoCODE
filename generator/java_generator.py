@@ -18,10 +18,10 @@ class JavaGenerator(CodeGeneratorStrategy):
         Utiliza xjc desde el JDK local para generar clases Java.
         """
         if getattr(sys, 'frozen', False):
-            exe_dir = Path(sys.executable).parent
-            internal_dir = exe_dir / "_internal"
-            base_path = internal_dir
+            # Si se ejecuta desde el archivo empaquetado
+            base_path = Path(sys._MEIPASS)
         else:
+            # Si se ejecuta desde el código fuente
             base_path = Path(__file__).parent.parent
 
         jdk_path = base_path / "jdk1.8.0_202"
@@ -45,10 +45,7 @@ class JavaGenerator(CodeGeneratorStrategy):
                 f.write(xsd_content)
 
             # Copiar el esquema xmldsig si existe
-            if getattr(sys, 'frozen', False):
-                schema_src = base_path / "schemas" / "xmldsig-core-schema.xsd"
-            else:
-                schema_src = Path(__file__).parent.parent / "schemas" / "xmldsig-core-schema.xsd"
+            schema_src = base_path / "schemas" / "xmldsig-core-schema.xsd"
             if schema_src.exists():
                 shutil.copy(schema_src, temp_dir)
 
