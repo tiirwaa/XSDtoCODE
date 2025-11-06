@@ -8,6 +8,7 @@ import re
 import copy
 import xml.etree.ElementTree as ET
 from generator.base import CodeGeneratorStrategy
+import logging
 
 XMLNS = "http://www.w3.org/2000/xmlns/"
 XS_NS = "http://www.w3.org/2001/XMLSchema"
@@ -156,7 +157,14 @@ class PHPGenerator(CodeGeneratorStrategy):
         """
         Utiliza xsd2php.phar con PHP portable para generar clases PHP.
         """
+        # Configurar logging
+        log_file = Path(self.output_folder) / 'generation.log'
+        logging.basicConfig(filename=str(log_file), level=logging.INFO, 
+                            format='%(asctime)s - %(levelname)s - %(message)s', 
+                            datefmt='%Y-%m-%d %H:%M:%S')
+        
         print("Iniciando generación de clases PHP")
+        logging.info("Iniciando generación de clases PHP")
         if getattr(sys, 'frozen', False):
             # Si se ejecuta desde el archivo empaquetado
             base_path = Path(sys._MEIPASS)
@@ -168,7 +176,9 @@ class PHPGenerator(CodeGeneratorStrategy):
         xsd2php_phar = base_path / "xsd2php.phar"
 
         print(f"php_exe: {php_exe}, exists: {php_exe.exists()}")
+        logging.info(f"php_exe: {php_exe}, exists: {php_exe.exists()}")
         print(f"xsd2php_phar: {xsd2php_phar}, exists: {xsd2php_phar.exists()}")
+        logging.info(f"xsd2php_phar: {xsd2php_phar}, exists: {xsd2php_phar.exists()}")
 
         xsd_abs_path = os.path.abspath(xsd_file_path)
         output_abs_path = os.path.abspath(self.output_folder)
@@ -266,6 +276,7 @@ class PHPGenerator(CodeGeneratorStrategy):
             env["PHP_TOOL_OPTIONS"] = "-d file.encoding=UTF-8"
 
             print("Ejecutando comando xsd2php...")
+            logging.info("Ejecutando comando xsd2php...")
             result = subprocess.run([
                 str(php_exe),
                 str(xsd2php_phar),
@@ -275,19 +286,28 @@ class PHPGenerator(CodeGeneratorStrategy):
             ], env=env, **kwargs)
 
             if result.returncode != 0:
-                print("Error al ejecutar xsd2php:")
+                error_msg = "Error al ejecutar xsd2php:"
+                print(error_msg)
+                logging.error(error_msg)
                 if result.stderr:
                     print(result.stderr)
+                    logging.error(result.stderr)
                 if result.stdout:
                     print("Salida estándar:")
                     print(result.stdout)
+                    logging.info("Salida estándar: " + result.stdout)
                 if not result.stderr and not result.stdout:
-                    print("No se devolvió ningún mensaje de error.")
+                    no_error_msg = "No se devolvió ningún mensaje de error."
+                    print(no_error_msg)
+                    logging.warning(no_error_msg)
                 raise Exception(f"xsd2php falló con código de salida {result.returncode}")
             else:
-                print("Clases PHP generadas con éxito.")
+                success_msg = "Clases PHP generadas con éxito."
+                print(success_msg)
+                logging.info(success_msg)
                 if result.stdout:
                     print(result.stdout)
+                    logging.info(result.stdout)
                 return True
         finally:
             # Limpiar directorio temporal

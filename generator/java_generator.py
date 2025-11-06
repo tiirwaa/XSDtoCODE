@@ -5,6 +5,7 @@ from pathlib import Path
 import fileinput
 import datetime
 from generator.base import CodeGeneratorStrategy
+import logging
 
 class JavaGenerator(CodeGeneratorStrategy):
     def generate(self, xsd_path):
@@ -17,7 +18,14 @@ class JavaGenerator(CodeGeneratorStrategy):
         """
         Utiliza xjc desde el JDK local para generar clases Java.
         """
+        # Configurar logging
+        log_file = Path(self.output_folder) / 'generation.log'
+        logging.basicConfig(filename=str(log_file), level=logging.INFO, 
+                            format='%(asctime)s - %(levelname)s - %(message)s', 
+                            datefmt='%Y-%m-%d %H:%M:%S')
+        
         print("Iniciando generación de clases Java")
+        logging.info("Iniciando generación de clases Java")
         if getattr(sys, 'frozen', False):
             # Si se ejecuta desde el archivo empaquetado
             base_path = Path(sys._MEIPASS)
@@ -69,11 +77,16 @@ class JavaGenerator(CodeGeneratorStrategy):
             classpath = f"{tools_jar}{os.pathsep}{dt_jar}"
 
             print(f"java_exe: {java_exe}, exists: {java_exe.exists()}")
+            logging.info(f"java_exe: {java_exe}, exists: {java_exe.exists()}")
             print(f"tools_jar: {tools_jar}, exists: {tools_jar.exists()}")
+            logging.info(f"tools_jar: {tools_jar}, exists: {tools_jar.exists()}")
             print(f"dt_jar: {dt_jar}, exists: {dt_jar.exists()}")
+            logging.info(f"dt_jar: {dt_jar}, exists: {dt_jar.exists()}")
             print(f"classpath: {classpath}")
+            logging.info(f"classpath: {classpath}")
 
             print("Ejecutando comando xjc...")
+            logging.info("Ejecutando comando xjc...")
             result = subprocess.run([
                 str(java_exe),
                 "-cp", str(classpath),
@@ -85,18 +98,27 @@ class JavaGenerator(CodeGeneratorStrategy):
             ], env=env, **kwargs)
 
             if result.returncode != 0:
-                print("Error al ejecutar xjc:")
+                error_msg = "Error al ejecutar xjc:"
+                print(error_msg)
+                logging.error(error_msg)
                 if result.stderr:
                     print(result.stderr)
+                    logging.error(result.stderr)
                 if result.stdout:
                     print("Salida estándar:")
                     print(result.stdout)
+                    logging.info("Salida estándar: " + result.stdout)
                 if not result.stderr and not result.stdout:
-                    print("No se devolvió ningún mensaje de error.")
+                    no_error_msg = "No se devolvió ningún mensaje de error."
+                    print(no_error_msg)
+                    logging.warning(no_error_msg)
                 raise Exception("xjc falló con código de salida {}".format(result.returncode))
             else:
-                print("Clases Java generadas con éxito.")
+                success_msg = "Clases Java generadas con éxito."
+                print(success_msg)
+                logging.info(success_msg)
                 print(result.stdout)
+                logging.info(result.stdout)
                 return True
         finally:
             # Limpiar directorio temporal
