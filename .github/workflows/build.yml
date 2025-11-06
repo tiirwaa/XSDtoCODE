@@ -34,7 +34,7 @@ jobs:
         mkdir -p temp
         export TMP=$PWD/temp
         cd xsd2php-build
-        box compile --no-parallel || (echo "Box failed, checking PHAR"; if [ -f ../xsd2php.phar ]; then echo "PHAR exists, continuing"; else exit 1; fi)
+        box compile --no-parallel --no-restart || (echo "Box failed, checking PHAR"; if [ -f ../xsd2php.phar ]; then echo "PHAR exists, continuing"; else exit 1; fi)
 
     - name: Set up Python
       uses: actions/setup-python@v4
