@@ -39,7 +39,7 @@ class CSharpGenerator(CodeGeneratorStrategy):
                 f.write(xsd_content)
 
             # Copiar el esquema xmldsig si existe
-            schema_src = base_path / "csharp" / "xmldsig-core-schema.xsd"
+            schema_src = base_path / "schemas" / "xmldsig-core-schema.xsd"
             if schema_src.exists():
                 shutil.copy(schema_src, temp_dir)
 
