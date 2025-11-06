@@ -19,13 +19,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up PHP for PHAR build
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.2'
-        tools: composer, box
-        ini-values: phar.readonly=0
-
     - name: Download xsd2php.phar
       run: |
         choco install 7zip -y
