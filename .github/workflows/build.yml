@@ -36,6 +36,12 @@ jobs:
         ./.venv/Scripts/python -m pip install --upgrade pip
         ./.venv/Scripts/pip install pyinstaller xsdata click jinja2 toposort ruff pillow
 
+    - name: Install Node.js dependencies
+      run: |
+        cd node
+        npm install
+        cd ..
+
     - name: Build EXE
       run: |
         ./.venv/Scripts/pyinstaller exe.spec
@@ -46,6 +52,9 @@ jobs:
         Copy-Item -Path xsd2php.phar -Destination dist\XSDtoCODE\_internal\xsd2php.phar -Force
         Copy-Item -Path jdk1.8.0_202 -Destination dist\XSDtoCODE\_internal\jdk1.8.0_202 -Recurse -Force
         Copy-Item -Path schemas -Destination dist\XSDtoCODE\_internal\schemas -Recurse -Force
+        Copy-Item -Path node -Destination dist\XSDtoCODE\_internal\node -Recurse -Force
+        Copy-Item -Path csharp -Destination dist\XSDtoCODE\_internal\csharp -Recurse -Force
+        Copy-Item -Path php -Destination dist\XSDtoCODE\_internal\php -Recurse -Force
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4

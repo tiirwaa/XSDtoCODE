@@ -16,7 +16,7 @@ a_gui = Analysis(
         ('iconogui.ico', '.'),
         ('iconomain.ico', '.'),
     ],
-    hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
+    hiddenimports=['xsdata', 'xsdata.cli', 'xsdata.codegen', 'xsdata.formats', 'xsdata.formats.dataclass', 'xsdata.models', 'xsdata.parsers', 'xsdata.writers', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -61,7 +61,7 @@ a_main = Analysis(
     ],
     datas=[  # Datos específicos para la consola
     ],
-    hiddenimports=['xsdata', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
+    hiddenimports=['xsdata', 'xsdata.cli', 'xsdata.codegen', 'xsdata.formats', 'xsdata.formats.dataclass', 'xsdata.models', 'xsdata.parsers', 'xsdata.writers', 'click', 'jinja2', 'toposort', 'docformatter', 'ruff'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
