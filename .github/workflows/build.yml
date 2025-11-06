@@ -22,13 +22,13 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m venv venv
-        ./venv/Scripts/python -m pip install --upgrade pip
-        ./venv/Scripts/pip install pyinstaller xsdata click jinja2 toposort
+        python -m venv .venv
+        ./.venv/Scripts/python -m pip install --upgrade pip
+        ./.venv/Scripts/pip install pyinstaller xsdata click jinja2 toposort
 
     - name: Build EXE
       run: |
-        ./venv/Scripts/pyinstaller exe.spec
+        ./.venv/Scripts/pyinstaller exe.spec
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
