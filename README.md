@@ -2,6 +2,8 @@
 
 ![Logo](iconogui.ico)
 
+*For the Spanish version, see [README.es.md](README.es.md).*
+
 **XSDtoCODE** is a tool written in **Python**, designed to automate the generation of classes from **XSD** (XML Schema Definition) files. Its main purpose is to simplify the integration of XML schemas into modern software projects, allowing developers to work directly with **programming objects and classes** instead of manually manipulating XML. This ensures that the generated classes accurately reflect the defined schema and can be **automatically serialized and deserialized to XML**, eliminating errors and manual effort.
 
 The tool is compatible with multiple programming languages, including **Java**, **C#**, **Python**, **PHP**, and **JSONSchema**, making it ideal for heterogeneous environments and projects that require consistency between systems using different languages. By supporting multiple languages, XSDtoCODE allows:
@@ -37,8 +39,6 @@ XSDtoCODE is ideal for developers and teams working with:
 - **Projects that require interoperability between multiple languages and platforms**
 
 In summary, **XSDtoCODE** transforms XSD files into ready-to-use programming classes that can be **automatically serialized and deserialized as XML**, facilitating the integration of XML data into any project and ensuring **consistency, efficiency, and robustness** in software development.
-
-*For the Spanish version, see [README.es.md](README.es.md).*
 
 ---
 
