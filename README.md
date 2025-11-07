@@ -2,42 +2,43 @@
 
 ![Logo](iconogui.ico)
 
-**XSDtoCODE** es una herramienta escrita en **Python**, diseñada para automatizar la generación de clases a partir de archivos **XSD** (XML Schema Definition). Su propósito principal es simplificar la integración de esquemas XML en proyectos de software modernos, permitiendo que los desarrolladores trabajen directamente con **objetos y clases de programación** en lugar de manipular XML manualmente. Esto asegura que las clases generadas reflejen con precisión el esquema definido y pueden **serializarse y deserializarse automáticamente a XML**, eliminando errores y esfuerzo manual.
+**XSDtoCODE** is a tool written in **Python**, designed to automate the generation of classes from **XSD** (XML Schema Definition) files. Its main purpose is to simplify the integration of XML schemas into modern software projects, allowing developers to work directly with **programming objects and classes** instead of manually manipulating XML. This ensures that the generated classes accurately reflect the defined schema and can be **automatically serialized and deserialized to XML**, eliminating errors and manual effort.
 
-La herramienta es compatible con múltiples lenguajes de programación, incluyendo **Java**, **C#**, **Python**, **PHP** y **JSONSchema**, lo que la hace ideal para entornos heterogéneos y proyectos que requieren consistencia entre sistemas que usan distintos lenguajes. Al soportar varios lenguajes, XSDtoCODE permite:
+The tool is compatible with multiple programming languages, including **Java**, **C#**, **Python**, **PHP**, and **JSONSchema**, making it ideal for heterogeneous environments and projects that require consistency between systems using different languages. By supporting multiple languages, XSDtoCODE allows:
 
-- Generar **modelos de datos robustos y confiables** directamente desde el esquema XSD.  
-- Reducir errores humanos asociados con la creación manual de XML o clases.  
-- Mantener sincronización automática entre el esquema XML y las clases utilizadas en la aplicación.  
-- Acelerar el desarrollo de aplicaciones que consumen o producen datos XML, incluyendo **factura electrónica** y sistemas financieros.
+- Generate **robust and reliable data models** directly from the XSD schema.  
+- Reduce human errors associated with manual creation of XML or classes.  
+- Maintain automatic synchronization between the XML schema and the classes used in the application.  
+- Accelerate the development of applications that consume or produce XML data, including **electronic invoicing** and financial systems.
 
-Para cada lenguaje, XSDtoCODE utiliza generadores especializados:  
+For each language, XSDtoCODE uses specialized generators:  
 
-- **Java**: [`xjc`](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/xjc.html), que convierte esquemas XSD en clases Java listas para serializar/deserializar XML.  
-- **C#**: [`XmlSchemaClassGenerator`](https://github.com/mganss/XmlSchemaClassGenerator), que crea clases .NET compatibles con el esquema XML.  
-- **Python**: [`xsdata`](https://github.com/tefra/xsdata), que genera clases Python modernas con soporte completo para serialización y deserialización automática de XML.  
-- **PHP**: `xsd2php.phar` (compilado desde [goetas-webservices/xsd2php](https://github.com/goetas-webservices/xsd2php)) ejecutado con PHP portable para generar clases PHP y metadata compatibles con JMS Serializer.  
-- **JSONSchema**: [`xsd2jsonschema`](https://github.com/tiirwaa/XSDtoCODE/blob/main/node/convert_xsd_to_jsonschema.js), que transforma XSD en esquemas JSON, permitiendo interoperabilidad con aplicaciones que usan JSON basado en XML.
+- **Java**: [`xjc`](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/xjc.html), which converts XSD schemas into Java classes ready to serialize/deserialize XML.  
+- **C#**: [`XmlSchemaClassGenerator`](https://github.com/mganss/XmlSchemaClassGenerator), which creates .NET classes compatible with the XML schema.  
+- **Python**: [`xsdata`](https://github.com/tefra/xsdata), which generates modern Python classes with full support for automatic XML serialization and deserialization.  
+- **PHP**: `xsd2php.phar` (compiled from [goetas-webservices/xsd2php](https://github.com/goetas-webservices/xsd2php)) executed with portable PHP to generate PHP classes and metadata compatible with JMS Serializer.  
+- **JSONSchema**: [`xsd2jsonschema`](https://github.com/tiirwaa/XSDtoCODE/blob/main/node/convert_xsd_to_jsonschema.js), which transforms XSD into JSON schemas, allowing interoperability with applications that use JSON based on XML.
 
-Entre los principales beneficios de usar XSDtoCODE se incluyen:  
+Among the main benefits of using XSDtoCODE are:  
 
-- **Automatización completa**: Genera automáticamente clases y mapeos, evitando la codificación manual de XML y estructuras de datos.  
-- **Compatibilidad**: El generador de clases funciona actualmente en **Windows**, pero los modelos generados son estándar y pueden compilarse y ejecutarse en cualquier plataforma compatible con el lenguaje correspondiente.  
-- **Integración con sistemas existentes**: Permite generar clases listas para integrarse con **servicios web SOAP**, **REST APIs basadas en XML**, APIs internas o intercambios de datos empresariales.  
-- **Flexibilidad**: Posibilidad de personalizar nombres de clases, paquetes o namespaces según las necesidades del proyecto.  
-- **Reducción de errores**: Al trabajar con clases generadas automáticamente, se minimizan las inconsistencias y errores que surgen al escribir XML a mano.  
-- **Ahorro de tiempo en mantenimiento**: Cada cambio en el XSD puede reflejarse regenerando las clases, manteniendo la aplicación sincronizada con el esquema actualizado.
+- **Complete automation**: Automatically generates classes and mappings, avoiding manual coding of XML and data structures.  
+- **Compatibility**: The class generator currently works on **Windows**, but the generated models are standard and can be compiled and run on any platform compatible with the corresponding language.  
+- **Integration with existing systems**: Allows generating classes ready to integrate with **SOAP web services**, **XML-based REST APIs**, internal APIs, or enterprise data exchanges.  
+- **Flexibility**: Possibility to customize class names, packages, or namespaces according to project needs.  
+- **Error reduction**: By working with automatically generated classes, inconsistencies and errors that arise from writing XML by hand are minimized.  
+- **Time savings in maintenance**: Each change in the XSD can be reflected by regenerating the classes, keeping the application synchronized with the updated schema.
 
-XSDtoCODE es ideal para desarrolladores y equipos que trabajan con:  
+XSDtoCODE is ideal for developers and teams working with:  
 
-- **Servicios web basados en XML** (SOAP o REST XML)  
-- **Facturación electrónica y sistemas financieros** que requieren intercambio de datos XML confiable  
-- **Intercambio de información empresarial** (EDI, XML estándar)  
-- **Sistemas que necesitan serialización y deserialización confiable de XML**  
-- **Proyectos que requieren interoperabilidad entre múltiples lenguajes y plataformas**
+- **XML-based web services** (SOAP or REST XML)  
+- **Electronic invoicing and financial systems** that require reliable XML data exchange  
+- **Enterprise information exchange** (EDI, standard XML)  
+- **Systems that need reliable XML serialization and deserialization**  
+- **Projects that require interoperability between multiple languages and platforms**
 
-En resumen, **XSDtoCODE** transforma archivos XSD en clases de programación listas para usar, que se pueden **serializar y deserializar automáticamente como XML**, facilitando la integración de datos XML en cualquier proyecto y garantizando **consistencia, eficiencia y robustez** en el desarrollo de software.
+In summary, **XSDtoCODE** transforms XSD files into ready-to-use programming classes that can be **automatically serialized and deserialized as XML**, facilitating the integration of XML data into any project and ensuring **consistency, efficiency, and robustness** in software development.
 
+*For the Spanish version, see [README.es.md](README.es.md).*
 
 ---
 
@@ -45,7 +46,7 @@ En resumen, **XSDtoCODE** transforma archivos XSD en clases de programación lis
 
 ---
 
-## 📦 Dependencias
+## 📦 Dependencies
 
 ### UI: `tkinter`
 
@@ -53,7 +54,7 @@ En resumen, **XSDtoCODE** transforma archivos XSD en clases de programación lis
 pip install tkinter
 ```
 
-Instala las siguientes dependencias con `pip`:
+Install the following dependencies with `pip`:
 
 ```bash
 pip install pillow
@@ -61,7 +62,7 @@ pip install xsdata
 pip install "xsdata[cli]"
 ```
 
-## 🔣 Lenguajes disponibles actualmente
+## 🔣 Currently Available Languages
 
 - Java
 - C#
@@ -71,33 +72,33 @@ pip install "xsdata[cli]"
 
 ---
 
-## 🖥️ Uso en Consola
+## 🖥️ Console Usage
 
 ```bash
-python main.py "archivo.xsd" "java|python|csharp|php|JSONSchema" "carpeta_salida"
+python main.py "file.xsd" "java|python|csharp|php|JSONSchema" "output_folder"
 ```
 
 ```bash
-main.exe "archivo.xsd" "java|python|csharp|php|JSONSchema" "carpeta_salida"
+main.exe "file.xsd" "java|python|csharp|php|JSONSchema" "output_folder"
 ```
 
-## ⚙️ Generar EXE
+## ⚙️ Generate EXE
 ```bash
 generar_exe.bat
 ```
 
-## PHP Portable
+## Portable PHP
 
-XSDtoCODE incluye **PHP completamente portable** (versión 8.3.27), por lo que **no requiere instalación previa de PHP** en el sistema anfitrión. El ejecutable final incorpora:
+XSDtoCODE includes **fully portable PHP** (version 8.3.27), so **it does not require prior PHP installation** on the host system. The final executable incorporates:
 
-- PHP 8.3.27 Thread Safe para Windows x64
-- Todas las extensiones estándar necesarias
-- El `xsd2php.phar` compilado desde goetas-webservices/xsd2php
-- Configuración mínima de `php.ini`
+- PHP 8.3.27 Thread Safe for Windows x64
+- All necessary standard extensions
+- The `xsd2php.phar` compiled from goetas-webservices/xsd2php
+- Minimal `php.ini` configuration
 
-Durante la build en GitHub Actions se compila automáticamente el `.phar` con Composer y Box, y se empaqueta dentro de `dist/XSDtoCODE/_internal/`. Así evitamos versionar archivos gigantes y siempre se distribuye la versión actualizada del generador PHP. Esto garantiza que la generación de clases PHP funcione en cualquier sistema Windows sin dependencias externas adicionales.
+During the build in GitHub Actions, the `.phar` is automatically compiled with Composer and Box, and packaged inside `dist/XSDtoCODE/_internal/`. This way we avoid versioning huge files and always distribute the updated version of the PHP generator. This ensures that PHP class generation works on any Windows system without additional external dependencies.
 
 
 ##  
-Desarrollado por: [A&G Programación y Desarrollo de Sistemas Informáticos S.A.](https://agsoft.co.cr)  
+Developed by: [A&G Programación y Desarrollo de Sistemas Informáticos S.A.](https://agsoft.co.cr)  
 ![Logo](https://agsoft.co.cr/wp-content/uploads/2023/08/logo.png)
